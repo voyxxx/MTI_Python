@@ -16,7 +16,13 @@ my_list[2] = 193
 
 # Кортеж(turple) - неизменяемая структура данных
 
-my_tuple = (1, 2, 3, 4, 'five')
+""" my_tuple = (1, 2, 3, 4, 'five')
+my_tuple = (1, 2, 3, 2) 
+print(my_tuple.count(2)) # Output: 2 
+print(my_tuple.index(3)) # Output: 2 
+print(my_tuple + (4, 5)) # Output: (1, 2, 3, 2, 4, 5) 
+print(my_tuple * 2) # Output: (1, 2, 3, 2, 1, 2, 3, 2) """
+
 
 # Словарь(Dictionary) - представляет собой пары ключ-значение. Все ключи - уникальные
 

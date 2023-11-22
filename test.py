@@ -162,7 +162,7 @@ if __name__ == '__main__':
     app.mainloop()
      """
 
-
+""" 
 from tkinter import ttk, Tk
 
 def inputAnswer(event, label):
@@ -190,3 +190,43 @@ def showWindow():
 
 if __name__ == "__main__":
     showWindow()
+ """
+
+""" text = ''
+print(len(text)) """
+
+""" 
+arr = [4,7,9]
+arr.reverse()
+myCount = arr.count(4)
+print(arr)
+print(myCount)
+ """
+
+""" x = 5
+arr = [x for x in range(10)]
+print(arr) """
+
+
+""" arr = [1,,3] # exception
+print(arr) """
+
+""" mySet = {1,2}
+print(mySet) """
+
+""" s1 = set()
+s2 = s1
+s2.add(7)
+print(s1) """
+
+""" my_tuple = (1, 2, 3, 2) 
+print(my_tuple.count(2)) # Output: 2 
+print(my_tuple.index(3)) # Output: 2 
+print(my_tuple[0]) # Output: 1
+print(my_tuple + (4, 5)) # Output: (1, 2, 3, 2, 4, 5) 
+print(my_tuple * 2) # Output: (1, 2, 3, 2, 1, 2, 3, 2) """
+
+
+
+student = {'имя': 'Иван', 'возраст': 20, 'курс': 'Python'}
+print(student.get('name'))

@@ -1,4 +1,4 @@
-cola = int(input('Сколько колы в продаже: '))
+""" cola = int(input('Сколько колы в продаже: '))
 clients = int(input('Сколько клиентов пришло: '))
 served = 0
 
@@ -12,8 +12,7 @@ while clients > 0 and cola > 0:
 else:
     if clients <= 0: print('Клиентов больше нет')
     if cola <= 0: print('Колы больше нет')
-print(f'Обслужено клиентов - {served}')
-
+print(f'Обслужено клиентов - {served}') """
 
 
 

@@ -7,7 +7,7 @@ isFirst = True
 isStopped = False
 
 while True:
-  helloText = f'Привет странник, это простой калькулятор. Введи пример с операторами: {', '.join(list(operations))}. Например {pattern}:\n'
+  helloText = f'Привет странник, это простой калькулятор. Введи пример с операторами: {", ".join(list(operations))}. Например {pattern}:\n'
   example = input(helloText) if isFirst else input()
   elements = re.split(fr'\s*([{operations}])\s*', example)
   if len(elements) == 3 and elements[2].isnumeric() and elements[0].isnumeric(): 

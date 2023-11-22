@@ -1,0 +1,24 @@
+; Изначально скрипт выключен
+ScriptEnabled := 0 
+
+Esc:: ; При нажатии клавиши Numpad1
+{
+    ; инвертируем состояние скрипта(включаем скрипт)
+    ScriptEnabled := !ScriptEnabled
+    ; если скрипт включен, начинаем кликать мышью
+    if (ScriptEnabled) {
+        ToolTip, Скрипт включен - клик мыши начнется
+        SetTimer, ClickMouse, 100 
+    }
+    else {
+        ToolTip, Скрипт выключен - клик мыши остановлен
+        SetTimer, ClickMouse, off
+    }
+    return
+}
+
+ClickMouse:
+{
+    Click
+    return
+}
