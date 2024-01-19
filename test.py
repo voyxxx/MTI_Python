@@ -228,5 +228,5 @@ print(my_tuple * 2) # Output: (1, 2, 3, 2, 1, 2, 3, 2) """
 
 
 
-student = {'имя': 'Иван', 'возраст': 20, 'курс': 'Python'}
-print(student.get('name'))
+# student = {'имя': 'Иван', 'возраст': 20, 'курс': 'Python'}
+# print(student.get('name'))
