@@ -2,6 +2,7 @@ import pygame
 import random
 
 pygame.init()
+pygame.mixer.init()
 
 HEIGHT = 600
 BACKGROUND_COLOR = (0, 255, 204)
@@ -15,10 +16,16 @@ WIDTH = SIZE_RECT * COUNT_RECT + 2 * SIZE_RECT + RETURN * COUNT_RECT
 HEADER_HEIGHT = 70
 HEADER_COLOR = (0, 255, 160) 
 
-path = './Group6/OOP/8 pyGame part 1/lesson8.py'
+path = './Group6/OOP/8 pyGame part 1/'
+pygame.mixer.music.load(f'{path}I\'m Alone.mp3')
+pygame.mixer.music.play(-1)
+
 
 app = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Hungry Snake')
+
+def draw_rect(color, row, column):
+  pygame.draw.rect(app, color, [x, y, SIZE_RECT, SIZE_RECT])
 
 isGameOver = False
 
@@ -38,9 +45,13 @@ while not isGameOver:
       
       color = RECT_COLOR if (column + row) % 2 == 0 else ODD_RECT_COLOR
 
-      pygame.draw.rect(app, color, [x, y, SIZE_RECT, SIZE_RECT])
+      draw_rect(color, row, column)
+      # pygame.draw.rect(app, color, [x, y, SIZE_RECT, SIZE_RECT])
   
   pygame.draw.rect(app, RECT_COLOR, [SIZE_RECT, HEADER_HEIGHT + SIZE_RECT, SIZE_RECT, SIZE_RECT])
   pygame.display.update()
 
-  
+
+pygame.mixer.music.stop()
+pygame.mixer.music.unload()
+pygame.quit()
