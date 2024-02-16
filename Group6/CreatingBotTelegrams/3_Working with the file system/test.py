@@ -1,3 +1,6 @@
-# file = open('Group6/CreatingBotTelegrams/3_Working with the file system/test.png', 'rb')
-file = open('Group6/CreatingBotTelegrams/3_Working with the file system/IMG_1128.HEIC', 'rb')
-print(file)
+message = '''sjdfkl
+43567
+ksdjfl'''
+
+print(len(message.split('\n')))
+
