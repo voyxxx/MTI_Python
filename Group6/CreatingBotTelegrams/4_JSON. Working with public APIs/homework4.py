@@ -6,6 +6,7 @@ bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(commands=['coffee'])
 def get_coffee(msg):
+  print(msg)
   try:
    response = requests.get('https://coffee.alexflipnote.dev/random.json').json()
   except ConnectionError as e:
