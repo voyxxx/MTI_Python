@@ -1,3 +1,5 @@
+import random
+
 # print(6/0)
 
 """ 
@@ -230,3 +232,6 @@ print(my_tuple * 2) # Output: (1, 2, 3, 2, 1, 2, 3, 2) """
 
 # student = {'имя': 'Иван', 'возраст': 20, 'курс': 'Python'}
 # print(student.get('name'))
+
+
+# print(random.randint(1, 2)) # 1 or 2
