@@ -260,6 +260,8 @@ locations = {
     }
 }
 
+game_locations = {}
+
 def getReward():
     return random.randint(1, 5)
 
@@ -287,24 +289,32 @@ players = {
     }
 }
 
-player = {
-    'gameIsOver': True,
-    'gold': 0,
-}
+player = {}
+
+def adjustLocation():
+    global locations, planets
+    # Перемешиваем значения planets и присваиваем их в новую переменную
+    temp_planets = list(deepcopy(planets).values())
+    shuffledPlanets = temp_planets[:8]
+    random.shuffle(shuffledPlanets)
+    shuffledPlanets += temp_planets[8:]
+    # Объединяем перемешанные значения planets и locations в один словарь game_locations
+    game_locations = deepcopy(locations)
+    for key, loc in game_locations.items():
+        if (int(key) > 0):
+            loc.update(shuffledPlanets[int(key)-1])
 
 # Выбираем случайную расу и планету из списка
 def randomChoiceSpeciesAndBirthPlace():
     global player
     birthPlace = deepcopy(random.choice(list(planets.items())[0:8])[1])
     player['birthPlace'] = birthPlace
-    print(birthPlace)
-    print('\n')
-    print(player)
 
 def startGame(msg):
     # Проверяем, что игра еще не началась
     if player['gameIsOver'] or True:
         player['gameIsOver'] = False
+        adjustLocation()
         # Создаем клавиатуру
         keyboard = telebot.types.InlineKeyboardMarkup()
         # Создаем кнопки для выбора аватара
@@ -313,7 +323,8 @@ def startGame(msg):
             button.append(telebot.types.InlineKeyboardButton(players[i]['name'], callback_data=i))
         keyboard.add(*button)
         # Отправляем сообщение с кнопками
-        bot.send_message(msg.chat.id, f'{locations["0"]["text"]} \nВыберите аватара:', reply_markup=keyboard)
+        bot.send_message(msg.chat.id, f'{locations["0"]["text"]} \nВыберите аватара:', reply_markup=keyboard)        
+        #
     else:
         bot.send_message(msg.chat.id, 'игра уже начата')
 
@@ -329,21 +340,27 @@ def start(msg):
 def game(msg):
     startGame(msg)
 
-# Обрабатываем кнопку "начать игру"
+# TODO удалить в финале
 @bot.message_handler(func = lambda x: x.text == 'Начать игру')
 def game(msg):
+    keyboard_remove = telebot.types.ReplyKeyboardRemove()
+    bot.send_message(msg.chat.id, 'Удаляем текущую клавиатуру', reply_markup=keyboard_remove)
     startGame(msg)
 
 @bot.callback_query_handler(func=lambda call: call.data in players)
 def initPlayer(call):
     id = call.message.chat.id
     global player
+    #  TODO остановился здесь
+    # 'gameIsOver': True,
+    # 'gold': 0,
     player[id] = deepcopy(players[call.data])
-    player[id]['loc'] = deepcopy(locations)
+    player[id]['loc'] = game_locations
     randomChoiceSpeciesAndBirthPlace()
-    print(player)
     answer = f'Вы принадлежите к расе {player["birthPlace"]["species"]} и находитесь планете {player["birthPlace"]["planet"]}'
     bot.send_message(call.message.chat.id, answer)
+    print(player)
+
 
 if __name__ == '__main__':
     bot.infinity_polling()
