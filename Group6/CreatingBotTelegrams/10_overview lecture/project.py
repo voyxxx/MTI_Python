@@ -67,7 +67,10 @@ planets = {
         'resource': 'вода',
     },
     '11': {
-        'text': 'После многих лет путешествий, мы, наконец, достигли планеты Сапиенция, населенной мудрыми и всезнающими существами. Эта планета, покрытая огромными библиотеками, является источником мудрости и знаний во всей галактике. Жители Сапиенции, известные как Сапиенты, обладают невероятной способностью к обучению и пониманию всего вокруг них. Основной ресурс Сапиенции - это знания и информация, хранящиеся в библиотеках. Мы рады, что наконец-то достигли этой планеты, и не можем дождаться, чтобы начать наше обучение с Сапиентами. Это действительно чудесное место, и мы знаем, что мы вернемся домой с несметным количеством знаний и мудрости.'
+        'text': 'После многих лет путешествий, мы, наконец, достигли планеты Сапиенция, населенной мудрыми и всезнающими существами. Эта планета, покрытая огромными библиотеками, является источником мудрости и знаний во всей галактике. Жители Сапиенции, известные как Сапиенты, обладают невероятной способностью к обучению и пониманию всего вокруг них. Основной ресурс Сапиенции - это знания и информация, хранящиеся в библиотеках. Мы рады, что наконец-то достигли этой планеты, и не можем дождаться, чтобы начать наше обучение с Сапиентами. Это действительно чудесное место, и мы знаем, что мы вернемся домой с несметным количеством знаний и мудрости.',
+        'species': 'сапиенты',
+        'planet': 'cапиенция',
+        'resource': '',
     },
 }
 
@@ -77,11 +80,10 @@ questions = {
     '3': 'На какой планете обитает раса ?', # добавить в вопрос расу
 }
 
+greeting = 'Вы готовы отправиться в путешествие к самой мудрой и всезнающей цивилизации во вселенной? Планета, населенная существами, которые собрали все знания и информацию во вселенной в огромные библиотеки, ожидает вас. Вы сможете обучаться у этих мудрых существ и получить доступ к несметным знаниям и мудрости.'
+
 
 locations = {
-    '0': {
-        'text': 'Вы готовы отправиться в путешествие к самой мудрой и всезнающей цивилизации во вселенной? Планета, населенная существами, которые собрали все знания и информацию во вселенной в огромные библиотеки, ожидает вас. Вы сможете обучаться у этих мудрых существ и получить доступ к несметным знаниям и мудрости.',
-    },
     '1': {
         'text': '',
         'isVisited': 'false',
@@ -292,7 +294,7 @@ players = {
 player = {}
 
 def adjustLocation():
-    global locations, planets
+    global locations, planets, game_locations
     # Перемешиваем значения planets и присваиваем их в новую переменную
     temp_planets = list(deepcopy(planets).values())
     shuffledPlanets = temp_planets[:8]
@@ -301,32 +303,49 @@ def adjustLocation():
     # Объединяем перемешанные значения planets и locations в один словарь game_locations
     game_locations = deepcopy(locations)
     for key, loc in game_locations.items():
-        if (int(key) > 0):
-            loc.update(shuffledPlanets[int(key)-1])
+        # if (int(key) > 0):
+        loc.update(shuffledPlanets[int(key)-1])
+
+def checkVisitePlaner(id, planet):
+    global player
+    for location in player[id]['loc'].values():
+        if (location['planet'] ==  planet):
+            location['isVisited'] = True
 
 # Выбираем случайную расу и планету из списка
-def randomChoiceSpeciesAndBirthPlace():
+def randomChoiceSpeciesAndBirthPlace(id):
     global player
     birthPlace = deepcopy(random.choice(list(planets.items())[0:8])[1])
-    player['birthPlace'] = birthPlace
+    player[id]['birthPlace'] = birthPlace
+    checkVisitePlaner(id, birthPlace['planet'])
 
-def startGame(msg):
-    # Проверяем, что игра еще не началась
-    if player['gameIsOver'] or True:
-        player['gameIsOver'] = False
-        adjustLocation()
-        # Создаем клавиатуру
-        keyboard = telebot.types.InlineKeyboardMarkup()
-        # Создаем кнопки для выбора аватара
-        button = []
-        for i in players:
-            button.append(telebot.types.InlineKeyboardButton(players[i]['name'], callback_data=i))
-        keyboard.add(*button)
-        # Отправляем сообщение с кнопками
-        bot.send_message(msg.chat.id, f'{locations["0"]["text"]} \nВыберите аватара:', reply_markup=keyboard)        
-        #
+def startGame(id):
+    # Проверяем начинал ли пользователь игру
+    if ((id in player) and ('gameIsBegin' in player[id])):
+        # Если игра начата прекращаем запуск новой игры
+        if (player[id]['gameIsBegin'] == True):
+            bot.send_message(id, 'игра уже начата')
+            return
+    # Проверяем начинал ли пользователь игру
     else:
-        bot.send_message(msg.chat.id, 'игра уже начата')
+        player[id] = {
+            'gameIsBegin': True
+        }
+        
+    player[id]['gameIsBegin'] = True
+    adjustLocation()
+    # Создаем клавиатуру
+    keyboard = telebot.types.InlineKeyboardMarkup()
+    # Создаем кнопки для выбора аватара
+    button = []
+    for i in players:
+        button.append(telebot.types.InlineKeyboardButton(players[i]['name'], callback_data=i))
+    keyboard.add(*button)
+    # Отправляем сообщение с кнопками
+    bot.send_message(id, f'{greeting} \nВыберите аватара:', reply_markup=keyboard)        
+
+def endGame(id): 
+  player[id]['gameIsBegin'] = False
 
 # Команда для старта бота
 @bot.message_handler(commands=['start'])
@@ -338,7 +357,7 @@ def start(msg):
 # Команда для начала игры
 @bot.message_handler(commands=['game'])
 def game(msg):
-    startGame(msg)
+    startGame(msg.chat.id)
 
 # TODO удалить в финале
 @bot.message_handler(func = lambda x: x.text == 'Начать игру')
@@ -351,13 +370,10 @@ def game(msg):
 def initPlayer(call):
     id = call.message.chat.id
     global player
-    #  TODO остановился здесь
-    # 'gameIsOver': True,
-    # 'gold': 0,
-    player[id] = deepcopy(players[call.data])
-    player[id]['loc'] = game_locations
-    randomChoiceSpeciesAndBirthPlace()
-    answer = f'Вы принадлежите к расе {player["birthPlace"]["species"]} и находитесь планете {player["birthPlace"]["planet"]}'
+    player[id].update(deepcopy(players[call.data]))
+    player[id].update({'loc': game_locations, 'gold': 0, 'fuel': 3})
+    randomChoiceSpeciesAndBirthPlace(id)
+    answer = f'Вы принадлежите к расе {player[id]["birthPlace"]["species"]} и находитесь планете {player[id]["birthPlace"]["planet"]}'
     bot.send_message(call.message.chat.id, answer)
     print(player)
 
