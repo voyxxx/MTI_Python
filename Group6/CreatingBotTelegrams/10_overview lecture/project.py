@@ -82,7 +82,6 @@ questions = {
 
 greeting = 'Вы готовы отправиться в путешествие к самой мудрой и всезнающей цивилизации во вселенной? Планета, населенная существами, которые собрали все знания и информацию во вселенной в огромные библиотеки, ожидает вас. Вы сможете обучаться у этих мудрых существ и получить доступ к несметным знаниям и мудрости.\n Ваша цель добраться до планеты cапиенция'
 
-
 locations = {
     '1': {
         'text': '',
@@ -309,8 +308,53 @@ player = {}
 def endGame(chatId):
     player[chatId]['gameIsBegin'] = False
 
+
 def getCurGoldAndFuel(userId):
     return f'доступно кол-во топлива: {player[userId]["fuel"]}, кол-во золота {player[userId]["gold"]}'
+
+
+# Обработка нажатия кнопки назад
+@bot.callback_query_handler(func=lambda call: call.data=='back')
+def handlerBack(call):
+    chatId = call.message.chat.id
+    userId = call.from_user.id
+    startTrip(chatId, userId)
+
+
+# Ловим событие нажатия кнопки с планетой (перемещение на планету)
+@bot.callback_query_handler(func=lambda call: call.data.startswith('planet'))
+def moveToPlanet(call):
+    chatId = call.message.chat.id
+    userId = call.from_user.id
+    currentPlanetNum = call.data.removeprefix('planet')
+
+    # Получить текущую планету и текущее количество топлива
+    previousPlanetNumber = player[userId]['currentPlanetNumber']
+    player[userId]['currentPlanetNumber'] = currentPlanetNum
+
+    # Получить затраты топлива до выбранной планеты
+    spentFuel = player[userId]['loc'][str(previousPlanetNumber)]['distances'][str(currentPlanetNum)]
+    # Обновляем кол-во топлива
+    player[userId]['fuel'] -= spentFuel
+    # Обновляем номер текущей планеты
+    player[userId]['currentPlanetNumber'] = currentPlanetNum
+    # Помечаем, что текущая планета посещена
+    player[userId]['loc'][str(currentPlanetNum)]['isVisited'] = True
+
+    # Проверить, является ли выбранная планета целевой
+    if player[userId]['loc'][str(currentPlanetNum)]['planet'] == 'cапиенция':
+        bot.send_message(chatId, 'Поздравляем! Вы достигли целевой планеты и победили в игре!')
+        endGame(userId)
+        return
+
+    # Проверить, является ли выбранная планета пустой и нет ли топлива
+    if 'species' not in player[userId]['loc'][currentPlanetNum] and player[userId]['fuel'] < 6:
+        bot.send_message(chatId, 'Вы оказались на пустой планете без топлива и проиграли игру. Попробуйте сыграть '
+                                 'ещё раз. Для этого введите команду "/game"')
+        endGame(userId)
+        return
+
+    startTrip(chatId, userId)
 
 
 # Посмотреть список доступных для путешествия планет
@@ -323,63 +367,16 @@ def checkAllowedPlanet(userId):
             player[userId]['allowedDistances'].update({distance: currentPlanetDistances[distance]})
 
 
-@bot.callback_query_handler(func=lambda call: call.data == 'back')
-def returnPreviousStep(call):
-    print('back')
-
-@bot.callback_query_handler(func=lambda call: call.data in list(map(lambda x: x['planet'], planets.values())))
-def moveToPlanet(call):
-    # Вычесть топливо, изменить текущую и посещенную планету, проверить если планета целевая то выигрыш, проверить если планета пустая и нет топлива то проигрыш
-    print(call)
-# начало генерации ИИ
-    chat_id = call.message.chat.id
-    user_id = call.from_user.id
-    chosen_planet = call.data
-
-    # Получить текущую планету и текущее количество топлива
-    current_planet_number = player[user_id]['currentPlanetNumber']
-    current_fuel = player[user_id]['fuel']
-
-    # Получить расстояние до выбранной планеты
-    distances = player[user_id]['loc'][str(current_planet_number)]['distances']
-    for planet_number, distance in distances.items():
-        if player[user_id]['loc'][planet_number]['planet'] == chosen_planet:
-            distance_to_chosen_planet = distance
-            break
-
-    # Проверить, достаточно ли топлива для путешествия на выбранную планету
-    if distance_to_chosen_planet > current_fuel:
-        bot.send_message(chat_id, 'Недостаточно топлива для путешествия на выбранную планету.')
-        return
-
-    # Вычесть топливо, изменить текущую и посещенную планету
-    player[user_id]['fuel'] -= distance_to_chosen_planet
-    player[user_id]['loc'][str(current_planet_number)]['isVisited'] = True
-    player[user_id]['currentPlanetNumber'] = planet_number
-
-    # Проверить, является ли выбранная планета целевой
-    if chosen_planet == 'cапиенция':
-        bot.send_message(chat_id, 'Поздравляем! Вы достигли целевой планеты и победили в игре!')
-        endGame(user_id)
-        return
-
-    # Проверить, является ли выбранная планета пустой и нет ли топлива
-    if 'species' not in player[user_id]['loc'][planet_number] and current_fuel == 0:
-        bot.send_message(chat_id, 'Вы оказались на пустой планете без топлива и проиграли игру.')
-        endGame(user_id)
-        return
-
-    # Обновить сообщение с текущим положением и доступными действиями
-    startTrip(chat_id, user_id)
-# конец генерации ИИ
-
 def displayMoveVariants(chatId, userId):
     keyboard = telebot.types.InlineKeyboardMarkup()
     text = ''
     if len(player[userId]['allowedDistances']) >= 0:
-        for distance in player[userId]['allowedDistances']:
-            planet = player[userId]['loc'][distance]['planet']
-            keyboard.add(telebot.types.InlineKeyboardButton(f'{planet} - {player[userId]['allowedDistances'][distance]} топлива', callback_data=planet))
+        for planetNum in player[userId]['allowedDistances']:
+            planet = player[userId]['loc'][planetNum]['planet']
+            keyboard.add(
+                telebot.types.InlineKeyboardButton(
+                    f'{planet} - {player[userId]["allowedDistances"][planetNum]} топлива',
+                    callback_data=f'planet{planetNum}'))
         text = f'{getCurGoldAndFuel(userId)}. Вам доступны путешествия на следующие планеты:'
     else:
         text = f'Доступных планет нет, {getCurGoldAndFuel(userId)}.'
@@ -397,7 +394,6 @@ def handlerAction(call):
         checkAllowedPlanet(userId)
         # Показать список планет для передвижения
         displayMoveVariants(chatId, userId)
-
     elif call.data == 'answer':
         print(1)
     elif call.data == 'risk':
@@ -416,8 +412,11 @@ def startTrip(chatId, userId):
         keyboard.add(telebot.types.InlineKeyboardButton(actions[action], callback_data=action))
     textValues = f'Вы находитесь на планете {player[userId]["birthPlace"]["planet"]}, в вашем корабле:\n{getCurGoldAndFuel(userId)}.\n'
     text = 'Ваши действия:'
-    msgBot = bot.send_message(chatId, textValues + text, reply_markup=keyboard)
-    player[userId]['msgId'] = msgBot.message_id
+    if 'msgId' in player[userId]:
+        bot.edit_message_text(textValues + text, chatId, player[userId]['msgId'], reply_markup=keyboard)
+    else:
+        msgBot = bot.send_message(chatId, textValues + text, reply_markup=keyboard)
+        player[userId]['msgId'] = msgBot.message_id
 
 
 # Пометка планеты посещённой
@@ -438,11 +437,11 @@ def randomChoiceSpeciesAndBirthPlace(userId):
     global player
     # Выбираем случайное число от 1 до 8
     birthPlanetNumber = random.randint(1, 8)
-    # Создаём переменную с случайной планетой
+    # Создаём переменную со случайной планетой
     birthPlace = game_locations[userId][str(birthPlanetNumber)]
     # Добавляем в место рождения номер планеты
     birthPlace.update({'planetNumber': birthPlanetNumber})
-    # Присваиваем в место рождения игрока словарь с случайной планетой
+    # Присваиваем в место рождения игрока словарь со случайной планетой
     player[userId]['birthPlace'] = birthPlace
     # Пометка планеты рождения посещённой
     checkVisitedPlaner(userId, birthPlace['planet'])
@@ -461,7 +460,7 @@ def initPlayer(call):
     player[userId].update({'loc': game_locations[userId], 'gold': 0, 'fuel': 3})
     # Выбираем случайную расу и планету из списка
     randomChoiceSpeciesAndBirthPlace(userId)
-    answer = f'Вы выбрали игрока {player[userId]['name']} - расы {player[userId]["birthPlace"]["species"]}.'
+    answer = f'Вы выбрали игрока {player[userId]["name"]} - расы {player[userId]["birthPlace"]["species"]}.'
     bot.send_message(chatId, answer)
     # Начало путешествия
     startTrip(chatId, userId)
