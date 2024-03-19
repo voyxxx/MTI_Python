@@ -1,4 +1,4 @@
-import random
+# import random
 
 # print(6/0)
 
@@ -61,7 +61,6 @@ newList = '\\'.join(map(str, myList))
 print(newList)
  """
 
-
 # Перехват закрытия окна
 """ from tkinter import *
  
@@ -78,8 +77,6 @@ root.title("Hello METANIT.COM")
 root.protocol("WM_DELETE_WINDOW", finish)
  
 root.mainloop() """
-
-
 
 """ 
 import tkinter as tk
@@ -128,9 +125,6 @@ button_clear.grid(row=2, column=1)
 
 root.mainloop() 
 """
-
-
-
 
 """ 
 import tkinter as tk
@@ -209,7 +203,6 @@ print(myCount)
 arr = [x for x in range(10)]
 print(arr) """
 
-
 """ arr = [1,,3] # exception
 print(arr) """
 
@@ -228,10 +221,16 @@ print(my_tuple[0]) # Output: 1
 print(my_tuple + (4, 5)) # Output: (1, 2, 3, 2, 4, 5) 
 print(my_tuple * 2) # Output: (1, 2, 3, 2, 1, 2, 3, 2) """
 
-
-
 # student = {'имя': 'Иван', 'возраст': 20, 'курс': 'Python'}
 # print(student.get('name'))
 
 
 # print(random.randint(1, 2)) # 1 or 2
+
+# for i in range(1, 9):
+#     print(i)
+
+# i = 5 // 2
+# rest = 5 % 2
+# print(i)
+# print(rest)

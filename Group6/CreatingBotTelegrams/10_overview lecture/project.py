@@ -283,19 +283,19 @@ def getPenalty():
 
 players = {
     'player1': {
-        'name': 'Сильный',
+        'name': 'мощь',
         'power': 5,
         'agility': 0,
         'eloquence': 0
     },
     'player2': {
-        'name': 'Ловкий',
+        'name': 'проворность',
         'power': 0,
         'agility': 5,
         'eloquence': 0
     },
     'player3': {
-        'name': 'Красноречивый',
+        'name': 'убедительность',
         'power': 0,
         'agility': 0,
         'eloquence': 5
@@ -380,7 +380,7 @@ def displayMoveVariants(chatId, userId):
                 telebot.types.InlineKeyboardButton(
                     f'{planet} - {player[userId]["allowedDistances"][planetNum]} топлива',
                     callback_data=f'planet{planetNum}'))
-        text = f'{getCurGoldAndFuel(userId)}. Вам доступны путешествия на следующие планеты:'
+        text = f'Сейчас {getCurGoldAndFuel(userId)}. Вам доступны путешествия на следующие планеты:'
     else:
         text = f'Доступных планет нет, {getCurGoldAndFuel(userId)}.'
     keyboard.add(telebot.types.InlineKeyboardButton('вернуться назад', callback_data='back'))
@@ -434,6 +434,42 @@ def playDeadlyGame(chatId, userId):
     bot.edit_message_text(text, chatId, player[userId]['msgId'], reply_markup=keyboard)
 
 
+# TODO remove
+# def goldWords(num):
+#     gold = ''
+#     if num == 0:
+#         gold = 'золота'
+#     elif num == 1:
+#         gold == 'золото'
+
+
+@bot.callback_query_handler(func=lambda call: call.data.startswith('getFuel'))
+def handlerTradeFuel(call):
+    chatId = call.message.chat.id
+    userId = call.from_user.id
+    _, fuelPurchased, goldSpent = call.data.split(',')
+    player[userId]['fuel'] += int(fuelPurchased)
+    player[userId]['gold'] = int(goldSpent)
+    startTrip(chatId, userId)
+
+
+def tradeFuel(chatId, userId):
+    keyboard = telebot.types.InlineKeyboardMarkup()
+    currentLocation = player[userId]['loc'][str(player[userId]['currentPlanetNumber'])]
+    # проверяем возможность совершить покупку
+    if player[userId]['gold'] >= currentLocation['fuelCost']:
+        availablePurchase = player[userId]['gold'] // currentLocation['fuelCost']
+        goldRest = player[userId]['gold'] % currentLocation['fuelCost']
+        text = f'Сейчас {getCurGoldAndFuel(userId)}.\nНа этой планете курс продажи 1 топливо = {currentLocation["fuelCost"]} золото.\nТопливо доступное для покупки: {availablePurchase}.'
+        keyboard.add(telebot.types.InlineKeyboardButton(f'Купить топливо: {availablePurchase}',
+                                                        callback_data=f'getFuel,{availablePurchase},{goldRest}'))
+    else:
+        text = f'Сейчас {getCurGoldAndFuel(userId)}.\nНа этой планете курс продажи 1 топливо = {currentLocation["fuelCost"]} золото.\nВашего золота недостаточно для покупки.'
+
+    keyboard.add(telebot.types.InlineKeyboardButton('Вернуться назад', callback_data='back'))
+    bot.edit_message_text(text, chatId, player[userId]['msgId'], reply_markup=keyboard)
+
+
 @bot.callback_query_handler(func=lambda call: call.data in actions)
 def handlerAction(call):
     chatId = call.message.chat.id
@@ -446,12 +482,13 @@ def handlerAction(call):
         displayMoveVariants(chatId, userId)
     # Если игрок выбрал ответить на вопрос
     elif call.data == 'answer':
-        print(1)
+        bot.send_message(call.message.chat.id, 'Вы ответили на вопрос))')
     # Если игрок выбрал сыграть в рисковую игру
     elif call.data == 'risk':
         playDeadlyGame(chatId, userId)
+    # Если игрок выбрал купить топливо
     elif call.data == 'buy':
-        bot.send_message(call.message.chat.id, 'Вы купили топливо')
+        tradeFuel(chatId, userId)
     elif call.data == 'steal':
         bot.send_message(call.message.chat.id, 'Вы украли топливо')
     elif call.data == 'takeByForce':
@@ -481,7 +518,7 @@ def checkVisitedPlaner(chatId, planet):
             location['isVisited'] = True
 
 
-# Помечаем текущую планету
+# Помечаем на какой планете сейчас находимся
 def checkCurrentPlanetNumber(chatId, num):
     player[chatId]['currentPlanetNumber'] = num
 
@@ -503,6 +540,15 @@ def randomChoiceSpeciesAndBirthPlace(userId):
     checkCurrentPlanetNumber(userId, birthPlanetNumber)
 
 
+# Назначаем цены на топливо
+def setFuelPrice(userId):
+    ratio = 1
+    if player[userId]["name"] == players['player3']['name']:
+        ratio = 2
+    for i in range(1, 9):
+        player[userId]['loc'][str(i)]['fuelCost'] = random.randint(int(2 / ratio), int(6 / ratio))
+
+
 # Обработка события выбора персонажа
 @bot.callback_query_handler(func=lambda call: call.data in players)
 def initPlayer(call):
@@ -514,7 +560,9 @@ def initPlayer(call):
     player[userId].update({'loc': game_locations[userId], 'gold': 0, 'fuel': 3})
     # Выбираем случайную расу и планету из списка
     randomChoiceSpeciesAndBirthPlace(userId)
-    answer = f'Вы выбрали игрока {player[userId]["name"]} - расы {player[userId]["birthPlace"]["species"]}.'
+    # Назначаем цены на топливо
+    setFuelPrice(userId)
+    answer = f'Вы выбрали специализацию {player[userId]["name"]}. Ваша раса {player[userId]["birthPlace"]["species"]}.'
     bot.send_message(chatId, answer)
     # Начало путешествия
     startTrip(chatId, userId)
@@ -556,13 +604,14 @@ def game(msg):
     keyboard = telebot.types.InlineKeyboardMarkup()
     # Создаем кнопки для выбора аватара
     button = []
+    #TODO удалять эти кнопки после выбора
     for i in players:
         button.append(telebot.types.InlineKeyboardButton(players[i]['name'], callback_data=i))
     keyboard.add(*button)
     # удаляем данные прошлой игры
     player[userId] = {}
     # Отправляем сообщение с кнопками
-    bot.send_message(chatId, f'{greeting} \nВыберите аватара:', reply_markup=keyboard)
+    bot.send_message(chatId, f'{greeting} \nВыберите специализацию:', reply_markup=keyboard)
 
 
 # Команда для старта бота
