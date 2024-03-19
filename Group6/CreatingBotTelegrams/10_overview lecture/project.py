@@ -76,8 +76,8 @@ planets = {
 
 questions = {
     '1': 'С какой планеты вы прибыли?',
-    '2': 'Какой основной ресурс на планете?',  # добавить в вопрос конкретную планету
-    '3': 'На какой планете обитает раса ?',  # добавить в вопрос расу
+    '2': lambda planet: f'Какой основной ресурс на планете {planet}?',
+    '3': lambda specie: f'На какой планете обитает раса {specie}?',
 }
 
 greeting = 'Вы готовы отправиться в путешествие к самой мудрой и всезнающей цивилизации во вселенной? Планета, населенная существами, которые собрали все знания и информацию во вселенной в огромные библиотеки, ожидает вас. Вы сможете обучаться у этих мудрых существ и получить доступ к несметным знаниям и мудрости.\n Ваша цель добраться до планеты cапиенция'
@@ -314,7 +314,7 @@ def getCurGoldAndFuel(userId):
 
 
 # Обработка нажатия кнопки назад
-@bot.callback_query_handler(func=lambda call: call.data=='back')
+@bot.callback_query_handler(func=lambda call: call.data == 'back')
 def handlerBack(call):
     chatId = call.message.chat.id
     userId = call.from_user.id
@@ -343,14 +343,17 @@ def moveToPlanet(call):
 
     # Проверить, является ли выбранная планета целевой
     if player[userId]['loc'][str(currentPlanetNum)]['planet'] == 'cапиенция':
-        bot.send_message(chatId, 'Поздравляем! Вы достигли целевой планеты и победили в игре!')
+        text = ('Поздравляем! Вы достигли целевой планеты и победили в игре!\nЧтобы сыграть ещё раз введите команду '
+                '/game')
+        bot.edit_message_text(text, chatId, player[userId]['msgId'])
         endGame(userId)
         return
 
     # Проверить, является ли выбранная планета пустой и нет ли топлива
     if 'species' not in player[userId]['loc'][currentPlanetNum] and player[userId]['fuel'] < 6:
-        bot.send_message(chatId, 'Вы оказались на пустой планете без топлива и проиграли игру. Попробуйте сыграть '
-                                 'ещё раз. Для этого введите команду "/game"')
+        text = ('Вы оказались на пустой планете без топлива и проиграли игру. Попробуйте сыграть ещё раз. Для этого '
+                'введите команду /game')
+        bot.edit_message_text(text, chatId, player[userId]['msgId'])
         endGame(userId)
         return
 
@@ -384,6 +387,53 @@ def displayMoveVariants(chatId, userId):
     bot.edit_message_text(text, chatId, player[userId]['msgId'], reply_markup=keyboard)
 
 
+@bot.callback_query_handler(func=lambda call: call.data.startswith('deadlyGame'))
+def risk_answer(call):
+    chatId = call.message.chat.id
+    userId = call.from_user.id
+
+    num = random.randint(1, 10)
+    selectedNum = call.data.removeprefix('deadlyGame')
+    if selectedNum == str(num):
+        text = ('Ты - воплощение удачи и благополучия во вселенной! Твои путешествия всегда проходят успешно. Твоя '
+                'удачливость настолько велика, что кажется, будто сама Вселенная подстраивается под твои планы. Твоя '
+                'удача - это не просто случайность, это дар, данный тебе свыше. Ты - истинный мастер своей судьбы, '
+                'и твой успех вдохновляет всех вокруг тебя. Мы отдаём тебе 500 топлива')
+        # Обновляем кол-во топлива
+        player[userId]['fuel'] += 500
+        keyboard = telebot.types.InlineKeyboardMarkup()
+        keyboard.add(telebot.types.InlineKeyboardButton('Продолжить игру', callback_data='back'))
+        bot.edit_message_text(text, chatId, player[userId]['msgId'], reply_markup=keyboard)
+    else:
+        endGame(userId)
+        text = ('Ты, рискнул своей жизнью и проиграл. Твоя неудача стала не только твоим личным позором, но и позором '
+                'для всей Вселенной. Теперь ты обречен на смерть. Твоя казнь станет напоминанием для всех о том, '
+                'что риск и азарт могут иметь трагические последствия.\nПопробуйте сыграть ещё раз. Для этого введите '
+                'команду /game')
+        bot.edit_message_text(text, chatId, player[userId]['msgId'])
+
+
+def playDeadlyGame(chatId, userId):
+    keyboard = telebot.types.InlineKeyboardMarkup(row_width=5)
+    # Создаем первый ряд кнопок
+    row1 = []
+    for i in range(1, 6):
+        row1.append(telebot.types.InlineKeyboardButton(text='❓', callback_data=f'deadlyGame{str(i)}'))
+    # Добавляем первый ряд кнопок в объект InlineKeyboardMarkup
+    keyboard.row(*row1)
+
+    # Создаем второй ряд кнопок
+    row2 = []
+    for i in range(6, 11):
+        row2.append(telebot.types.InlineKeyboardButton(text='❓', callback_data=f'deadlyGame{str(i)}'))
+    # Добавляем второй ряд кнопок в объект InlineKeyboardMarkup
+    keyboard.row(*row2)
+    text = ('Местные жители предлагают тебе сыграть в смертельную игру, где ставкой является твоя жизнь.\nГотов ли ты '
+            'рискнуть всем? Если да, выбери кнопку. Выигрышная только одна.\nВ случае выигрыша ты получишь 500 '
+            'топлива и славу самого удачливого героя вселенной.\nВ случае проигрыша позорную смерть.')
+    bot.edit_message_text(text, chatId, player[userId]['msgId'], reply_markup=keyboard)
+
+
 @bot.callback_query_handler(func=lambda call: call.data in actions)
 def handlerAction(call):
     chatId = call.message.chat.id
@@ -394,10 +444,12 @@ def handlerAction(call):
         checkAllowedPlanet(userId)
         # Показать список планет для передвижения
         displayMoveVariants(chatId, userId)
+    # Если игрок выбрал ответить на вопрос
     elif call.data == 'answer':
         print(1)
+    # Если игрок выбрал сыграть в рисковую игру
     elif call.data == 'risk':
-        print(1)
+        playDeadlyGame(chatId, userId)
     elif call.data == 'buy':
         bot.send_message(call.message.chat.id, 'Вы купили топливо')
     elif call.data == 'steal':
@@ -410,7 +462,9 @@ def startTrip(chatId, userId):
     keyboard = telebot.types.InlineKeyboardMarkup()
     for action in actions:
         keyboard.add(telebot.types.InlineKeyboardButton(actions[action], callback_data=action))
-    textValues = f'Вы находитесь на планете {player[userId]["birthPlace"]["planet"]}, в вашем корабле:\n{getCurGoldAndFuel(userId)}.\n'
+    # Получаем текущую планету
+    currentPlanetName = player[userId]["loc"][str(player[userId]["currentPlanetNumber"])]["planet"]
+    textValues = f'Вы находитесь на планете {currentPlanetName}, в вашем корабле:\n{getCurGoldAndFuel(userId)}.\n'
     text = 'Ваши действия:'
     if 'msgId' in player[userId]:
         bot.edit_message_text(textValues + text, chatId, player[userId]['msgId'], reply_markup=keyboard)
@@ -505,6 +559,8 @@ def game(msg):
     for i in players:
         button.append(telebot.types.InlineKeyboardButton(players[i]['name'], callback_data=i))
     keyboard.add(*button)
+    # удаляем данные прошлой игры
+    player[userId] = {}
     # Отправляем сообщение с кнопками
     bot.send_message(chatId, f'{greeting} \nВыберите аватара:', reply_markup=keyboard)
 
