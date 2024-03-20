@@ -5,16 +5,17 @@ from copy import deepcopy
 
 bot = telebot.TeleBot(TOKEN)
 
+# Словарь с информацией о планетах
 planets = {
     '1': {
-        'text': 'Призрачные Спектры - это эфирные существа, живущие планете **Туманность**, полной газов и пыли. Основной ресурс - редкий газ, используемые для межзвездных путешествий. Их неспособность физически защищать свои ресурсы делает их уязвимыми для краж. Слабость: Незаметно украсть.',
+        'text': 'Призрачные Спектры - это эфирные существа, живущие планете Туманность, полной газов и пыли. Основной ресурс - редкий газ, используемые для межзвездных путешествий. Их неспособность физически защищать свои ресурсы делает их уязвимыми для краж. Слабость: Незаметно украсть.',
         'species': 'призрачные спектры',
         'planet': 'туманность',
         'resource': 'редкий газ',
         'weakness': ['steal'],
     },
     '2': {
-        'text': 'Бронированные Титаны - это мощные существа, обитающие на планете-гиганте **Титан-7**, покрытой мощной броней. Основной ресурс - металлы и минералы, используемые для производства оружия и брони. Их жадность и склонность к роскоши делает их уязвимыми для покупки. Слабость: Купить.',
+        'text': 'Бронированные Титаны - это мощные существа, обитающие на планете-гиганте Титан-7, покрытой мощной броней. Основной ресурс - металлы и минералы, используемые для производства оружия и брони. Их жадность и склонность к роскоши делает их уязвимыми для покупки. Слабость: Купить.',
         'species': 'бронированные титаны',
         'planet': 'титан-7',
         'resource': 'металлы и минералы',
@@ -39,7 +40,7 @@ planets = {
         'species': 'богатые плутократы',
         'planet': 'плутократия',
         'resource': 'драгоценные металлы и камни',
-        'weakness': ['steal']
+        'weakness': ['steal, buy']
     },
     '6': {
         'text': 'Воинственные Берсеркеры - это агрессивные существа, населяющие планету-вулкан Берсерк. Основной ресурс - огонь и лава, используемые для производства оружия и энергии. Их агрессивность и неспособность контролировать свои эмоции делает их уязвимыми для обмана и краж. Слабость: Незаметно украсть, Отобрать силой.',
@@ -85,15 +86,18 @@ planets = {
     },
 }
 
+# Словарь с вопросами
 questions = {
     '1': lambda _: f'С какой планеты вы прибыли?',
     '2': lambda planet: f'Какой основной ресурс на планете {planet}?',
-    '3': lambda specie: f'На какой планете обитает раса {specie}?',
+    '3': lambda species: f'На какой планете обитает раса {species}?',
     '4': lambda _: f'Название вашей родной планеты?',
 }
 
+# Приветственное сообщение
 greeting = 'Вы готовы отправиться в путешествие к самой мудрой и всезнающей цивилизации во вселенной? Планета, населенная существами, которые собрали все знания и информацию во вселенной в огромные библиотеки, ожидает вас. Вы сможете обучаться у этих мудрых существ и получить доступ к несметным знаниям и мудрости.\nВаша цель добраться до планеты cапиенция.'
 
+# Словарь с информацией о локациях
 locations = {
     '1': {
         'text': '',
@@ -273,6 +277,7 @@ locations = {
     }
 }
 
+# Словарь с действиями
 actions = {
     'move': 'Отправиться на другую планету.',
     'answer': 'Ответить на вопрос.',
@@ -282,37 +287,31 @@ actions = {
     'takeByForce': 'Отобрать топливо силой.',
 }
 
+# Словарь с локациями для конкретного пользователя
 game_locations = {}
 
+# Словарь с аватарами
 players = {
     'player1': {
         'name': 'мощь',
-        'power': 5,
-        'agility': 0,
-        'eloquence': 0
     },
     'player2': {
         'name': 'проворность',
-        'power': 0,
-        'agility': 5,
-        'eloquence': 0
     },
     'player3': {
         'name': 'убедительность',
-        'power': 0,
-        'agility': 0,
-        'eloquence': 5
     }
 }
 
+# Словарь с информацией о текущем игроке
 player = {}
 
-
+# Функция для завершения игры
 def endGame(chatId):
     global player
     player[chatId]['gameIsBegin'] = False
 
-
+# Функция для получения текущего количества золота и топлива у игрока
 def getCurGoldAndFuel(userId):
     global player
     return f'доступно кол-во топлива: {player[userId]["fuel"]}, кол-во золота {player[userId]["gold"]}'
@@ -369,7 +368,7 @@ def moveToPlanet(call):
     startTrip(chatId, userId)
 
 
-# Посмотреть список доступных для путешествия планет
+# Функция для проверки доступных для путешествия планет
 def checkAllowedPlanet(userId):
     global player
     currentPlanetDistances = player[userId]['loc'][str(player[userId]['currentPlanetNumber'])]['distances']
@@ -381,7 +380,7 @@ def checkAllowedPlanet(userId):
             player[userId]['allowedDistances'].update({distance: currentPlanetDistances[distance]})
 
 
-# Отобразить список доступных для путешествия планет
+# Функция для отображения списка доступных для путешествия планет
 def displayMoveVariants(chatId, userId):
     keyboard = telebot.types.InlineKeyboardMarkup()
     text = ''
@@ -399,14 +398,14 @@ def displayMoveVariants(chatId, userId):
     bot.edit_message_text(text, chatId, player[userId]['msgId'], reply_markup=keyboard)
 
 
-# Обработка нажатия кнопки назад
+# Обработка нажатия кнопки с ответом на вопрос
 @bot.callback_query_handler(func=lambda call: call.data.startswith('question'))
 def handlerAskQuestion(call):
     chatId = call.message.chat.id
     userId = call.from_user.id
     _, isRight, questionNum = call.data.split(',')
     if isRight == 'True':
-        gold = 2 if questionNum == 4 else 3 if questionNum == 1 else 5
+        gold = 2 if int(questionNum) == 4 else 3 if int(questionNum) == 3 else 5
         player[userId]['gold'] += gold
         text = f'Ответ верный. Вы заработали {gold} золота'
     else:
@@ -414,44 +413,68 @@ def handlerAskQuestion(call):
     bot.answer_callback_query(call.id, text, show_alert=True)
     startTrip(chatId, userId)
 
-
+# Функция для задавания вопроса и генерации вариантов ответов
 def askQuestion(chatId, userId):
+    # Генерируем номер вопроса случайным образом от 1 до 4
     questionNum = int(random.randint(1, 4))
-    questionNum = 2
+    # Если номер вопроса равен 1 и в словаре player нет ключа 'previousPlace',
+    # то генерируем новый номер вопроса от 2 до 4
     if questionNum == 1 and 'previousPlace' not in player[userId]:
         questionNum = str(random.randint(2, 4))
+    # Получаем текущую планету игрока
     currentPlanet = player[userId]['loc'][str(player[userId]['currentPlanetNumber'])]
+    # Выбираем случайную планету из списка населённых планет
     randomPlanet = player[userId]['loc'][str(random.randint(1, 9))]
+    # Инициализируем переменную correctAnswer пустой строкой
     correctAnswer = ''
+    # Если название случайной планеты совпадает с названием текущей планеты,
+    # выбираем новую случайную планету из списка населённых планет
     while randomPlanet['planet'] == currentPlanet['planet']:
-        randomPlanet = player[userId]['loc'][str(random.randint(1, 9))]
+        randomPlanet = player[userId]['loc'][str(random.randint(1, 8))]
+    # Создаем клавиатуру
     keyboard = telebot.types.InlineKeyboardMarkup()
+    # Если номер вопроса равен 1, 3 или 4,
     if questionNum == 1 or questionNum == 3 or questionNum == 4:
+        # Создаем список названий планет из списка планет игрока
         planet_names = [planet['planet'] for planet in player[userId]['loc'].values()]
+        # В зависимости от номера вопроса, устанавливаем правильный ответ
         if questionNum == 1:
             correctAnswer = player[userId]['previousPlace']['planet']
         elif questionNum == 3:
             correctAnswer = randomPlanet['planet']
         elif questionNum == 4:
             correctAnswer = player[userId]['birthPlace']['planet']
+        # Создаем кнопки для каждого названия планеты в списке
         for planet_name in planet_names:
-            data = f'question,{planet_name == correctAnswer}'
+            # Формируем callback_data для каждой кнопки
+            data = f'question,{planet_name == correctAnswer}, {questionNum}'
+            # Добавляем кнопку на клавиатуру
             keyboard.add(
                 telebot.types.InlineKeyboardButton(planet_name, callback_data=data))
+    # Если номер вопроса равен 2,
     elif questionNum == 2:
+        # Создаем множество ресурсов из списка планет игрока
         resources = {planet['resource'] for planet in player[userId]['loc'].values() if planet['resource']}
+        # Устанавливаем правильный ответ
         correctAnswer = randomPlanet['resource']
+        # Создаем кнопки для каждого ресурса в множестве ресурсов
         for resource in resources:
+            # Формируем callback_data для каждой кнопки
             data = f'question,{resource == correctAnswer}, {questionNum}'
+            # Добавляем кнопку на клавиатуру
             keyboard.add(
                 telebot.types.InlineKeyboardButton(resource, callback_data=data))
 
-    # генерация вопроса
-    text = questions[str(questionNum)](randomPlanet['planet'])
+    # Генерируем вопрос в зависимости от номера вопроса и передаем ему аргумент
+    arg = randomPlanet['planet'] if questionNum == 2 else randomPlanet['species']
+    text = questions[str(questionNum)](arg)
+    # Добавляем кнопку "вернуться назад" на клавиатуру
     keyboard.add(telebot.types.InlineKeyboardButton('вернуться назад', callback_data='back'))
+    # Отправляем сообщение с вопросом и клавиатурой
     bot.edit_message_text(text, chatId, player[userId]['msgId'], reply_markup=keyboard)
 
 
+# Обработка нажатия кнопки со смертельной игрой
 @bot.callback_query_handler(func=lambda call: call.data.startswith('deadlyGame'))
 def risk_answer(call):
     chatId = call.message.chat.id
@@ -499,6 +522,7 @@ def playDeadlyGame(chatId, userId):
     bot.edit_message_text(text, chatId, player[userId]['msgId'], reply_markup=keyboard)
 
 
+# Обработка нажатия кнопки с покупкой топлива
 @bot.callback_query_handler(func=lambda call: call.data.startswith('getFuel'))
 def handlerTradeFuel(call):
     global player
@@ -511,19 +535,21 @@ def handlerTradeFuel(call):
 
 
 def tradeFuel(chatId, userId):
-    # TODO изменить с учётом слабости
-    # также учесть tradePenalty
     keyboard = telebot.types.InlineKeyboardMarkup()
     currentLocation = player[userId]['loc'][str(player[userId]['currentPlanetNumber'])]
+    ratio = 1
+    if 'buy' in currentLocation['weakness']:
+        ratio = 2
+    fuelCost = int(currentLocation['fuelCost'] / ratio + player[userId]['tradePenalty'])
     # проверяем возможность совершить покупку
-    if player[userId]['gold'] >= currentLocation['fuelCost']:
-        availablePurchase = player[userId]['gold'] // currentLocation['fuelCost']
+    if player[userId]['gold'] >= fuelCost:
+        availablePurchase = int(player[userId]['gold'] // fuelCost)
         goldRest = player[userId]['gold'] % currentLocation['fuelCost']
-        text = f'Сейчас {getCurGoldAndFuel(userId)}.\nНа этой планете курс продажи 1 топливо = {currentLocation["fuelCost"]} золото.\nТопливо доступное для покупки: {availablePurchase}.'
+        text = f'Сейчас {getCurGoldAndFuel(userId)}.\nНа этой планете курс продажи 1 топливо = {fuelCost} золото.\nТопливо доступное для покупки: {availablePurchase}.'
         keyboard.add(telebot.types.InlineKeyboardButton(f'Купить топливо: {availablePurchase}',
                                                         callback_data=f'getFuel,{availablePurchase},{goldRest}'))
     else:
-        text = f'Сейчас {getCurGoldAndFuel(userId)}.\nНа этой планете курс продажи 1 топливо = {currentLocation["fuelCost"]} золото.\nВашего золота недостаточно для покупки.'
+        text = f'Сейчас {getCurGoldAndFuel(userId)}.\nНа этой планете курс продажи 1 топливо = {fuelCost} золото.\nВашего золота недостаточно для покупки.'
 
     keyboard.add(telebot.types.InlineKeyboardButton('Вернуться назад', callback_data='back'))
     bot.edit_message_text(text, chatId, player[userId]['msgId'], reply_markup=keyboard)
@@ -613,11 +639,15 @@ def handlerAction(call):
         takeFuelByForce(chatId, userId, call.id)
 
 
+# Функция для начала путешествия
 def startTrip(chatId, userId):
     keyboard = telebot.types.InlineKeyboardMarkup()
-    for action in actions:
-        keyboard.add(telebot.types.InlineKeyboardButton(actions[action], callback_data=action))
     # Получаем текущую планету
+    if int(player[userId]["currentPlanetNumber"]) > 8:
+        keyboard.add(telebot.types.InlineKeyboardButton(actions['move'], callback_data='move'))
+    else:
+        for action in actions:
+            keyboard.add(telebot.types.InlineKeyboardButton(actions[action], callback_data=action))
     currentPlanet = player[userId]["loc"][str(player[userId]["currentPlanetNumber"])]
     currentPlanetName = currentPlanet["planet"]
     isAboutPlanet = int(player[userId]["currentPlanetNumber"]) > 8
@@ -664,7 +694,7 @@ def setFuelPrice(userId):
     if player[userId]["name"] == players['player3']['name']:
         ratio = 2
     for i in range(1, 9):
-        player[userId]['loc'][str(i)]['fuelCost'] = random.randint(int(2 / ratio), int(6 / ratio))
+        player[userId]['loc'][str(i)]['fuelCost'] = random.randint(int(4 / ratio), int(8 / ratio))
 
 
 # Обработка события выбора персонажа
@@ -699,6 +729,9 @@ def adjustLocation(userId):
     for key, loc in game_locations[userId].items():
         loc.update(shuffledPlanets[int(key) - 1])
 
+def delete_message(message, chat_id, message_id):
+    # удаляем сообщение
+    bot.delete_message(chat_id, message_id)
 
 # Команда для начала игры
 @bot.message_handler(commands=['game'])
@@ -710,10 +743,7 @@ def game(msg):
     if (userId in player) and ('gameIsBegin' in player[userId]):
         # Если игра начата прекращаем запуск новой игры
         if player[userId]['gameIsBegin']:
-            # TODO
-            # keyboard = telebot.types.InlineKeyboardMarkup()
-            # keyboard.add(telebot.types.InlineKeyboardButton('вернуться назад', callback_data='back'))
-            # bot.edit_message_text('игра уже начата', chatId, player[userId]['msgId'], reply_markup=keyboard)
+            bot.send_message(chatId, 'Игра уже начата')
             return
     else:
         # удаляем данные прошлой игры и отмечаем что игра уже идёт
@@ -741,8 +771,7 @@ def start(msg):
     chatId = msg.chat.id
     userId = msg.from_user.id
     if (userId in player) and ('gameIsBegin' in player[userId]):
-        # TODO handle
-        print('aaaaaaaaaaaaaaa')
+        bot.send_message(chatId, 'Игра уже начата')
     else:
         bot.send_message(msg.chat.id, f'Привет! Если хочешь сыграть, введи команду /game')
 
