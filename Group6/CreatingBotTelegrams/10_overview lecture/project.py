@@ -329,7 +329,6 @@ def handlerBack(call):
 # Ловим событие нажатия кнопки с планетой (перемещение на планету)
 @bot.callback_query_handler(func=lambda call: call.data.startswith('planet'))
 def moveToPlanet(call):
-    # TODO добавить описание планеты, ресурсов, слабостей
     global player
     chatId = call.message.chat.id
     userId = call.from_user.id
@@ -619,8 +618,11 @@ def startTrip(chatId, userId):
     for action in actions:
         keyboard.add(telebot.types.InlineKeyboardButton(actions[action], callback_data=action))
     # Получаем текущую планету
-    currentPlanetName = player[userId]["loc"][str(player[userId]["currentPlanetNumber"])]["planet"]
-    textValues = f'Вы находитесь на планете {currentPlanetName}, в вашем корабле:\n{getCurGoldAndFuel(userId)}.\n'
+    currentPlanet = player[userId]["loc"][str(player[userId]["currentPlanetNumber"])]
+    currentPlanetName = currentPlanet["planet"]
+    isAboutPlanet = int(player[userId]["currentPlanetNumber"]) > 8
+    textFromLoc = currentPlanet['text'] if isAboutPlanet else f'На планете обитает раса {currentPlanet['text']}'
+    textValues = f'Вы находитесь на планете {currentPlanetName}\n{textFromLoc}\nВ вашем корабле:\n{getCurGoldAndFuel(userId)}.\n'
     text = 'Ваши действия:'
     bot.edit_message_text(textValues + text, chatId, player[userId]['msgId'], reply_markup=keyboard)
 
