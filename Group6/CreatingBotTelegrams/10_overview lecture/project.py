@@ -405,22 +405,20 @@ def displayMoveVariants(chatId, userId):
 def handlerAskQuestion(call):
     chatId = call.message.chat.id
     userId = call.from_user.id
-    _, answer, correctAnswer, questionNum = call.data.split(',')
-    if answer == correctAnswer:
+    _, isRight, questionNum = call.data.split(',')
+    if isRight == 'True':
         gold = 2 if questionNum == 4 else 3 if questionNum == 1 else 5
         player[userId]['gold'] += gold
-        text = f'Верно правильный ответ "{correctAnswer}". Вы заработали {gold} монет золота'
+        text = f'Ответ верный. Вы заработали {gold} золота'
     else:
         text = 'Ответ не верный'
-    # keyboard = telebot.types.InlineKeyboardMarkup()
-    # keyboard.add(telebot.types.InlineKeyboardButton('вернуться назад', callback_data='back'))
-    # bot.edit_message_text(text, chatId, player[userId]['msgId'], reply_markup=keyboard)
     bot.answer_callback_query(call.id, text, show_alert=True)
     startTrip(chatId, userId)
 
 
 def askQuestion(chatId, userId):
     questionNum = int(random.randint(1, 4))
+    questionNum = 2
     if questionNum == 1 and 'previousPlace' not in player[userId]:
         questionNum = str(random.randint(2, 4))
     currentPlanet = player[userId]['loc'][str(player[userId]['currentPlanetNumber'])]
@@ -438,14 +436,14 @@ def askQuestion(chatId, userId):
         elif questionNum == 4:
             correctAnswer = player[userId]['birthPlace']['planet']
         for planet_name in planet_names:
-            data = f'question,{planet_name},{correctAnswer},{questionNum}'
+            data = f'question,{planet_name == correctAnswer}'
             keyboard.add(
                 telebot.types.InlineKeyboardButton(planet_name, callback_data=data))
     elif questionNum == 2:
         resources = {planet['resource'] for planet in player[userId]['loc'].values() if planet['resource']}
         correctAnswer = randomPlanet['resource']
         for resource in resources:
-            data = f'question,{resource},{correctAnswer},{questionNum}'
+            data = f'question,{resource == correctAnswer}, {questionNum}'
             keyboard.add(
                 telebot.types.InlineKeyboardButton(resource, callback_data=data))
 
@@ -547,7 +545,7 @@ def stealFuel(chatId, userId, callId):
         loot = random.randint(1 * lootChance, 3 * lootChance)
         player[userId]['fuel'] += loot
         bot.answer_callback_query(callId, f'Вы успешно совершили кражу и получили {loot} топлива', show_alert=True)
-    # При неуспешном ограблении 
+    # При неуспешном ограблении
     else:
         # отобрали всё золото
         player[userId]['gold'] = 0
@@ -577,7 +575,7 @@ def takeFuelByForce(chatId, userId, callId):
         bot.answer_callback_query(callId, f'Вы успешно отобрали топливо у местных жителей и получили {loot} топлива',
                                   show_alert=True)
         startTrip(chatId, userId)
-    # При неуспешном налёте 
+    # При неуспешном налёте
     else:
         # отобрали всё золото
         player[userId]['gold'] = 0
