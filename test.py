@@ -234,3 +234,8 @@ print(my_tuple * 2) # Output: (1, 2, 3, 2, 1, 2, 3, 2) """
 # rest = 5 % 2
 # print(i)
 # print(rest)
+
+myDict={'emptyString': ''}
+if 'emptyString' not in myDict:
+    print('isEmpty')
+else: print('not Empty')

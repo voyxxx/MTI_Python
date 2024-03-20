@@ -10,67 +10,78 @@ planets = {
         'text': 'Призрачные Спектры - это эфирные существа, живущие планете **Туманность**, полной газов и пыли. Основной ресурс - редкий газ, используемые для межзвездных путешествий. Их неспособность физически защищать свои ресурсы делает их уязвимыми для краж. Слабость: Незаметно украсть.',
         'species': 'призрачные спектры',
         'planet': 'туманность',
-        'resource': 'редкий газ'
+        'resource': 'редкий газ',
+        'weakness': ['steal'],
     },
     '2': {
         'text': 'Бронированные Титаны - это мощные существа, обитающие на планете-гиганте **Титан-7**, покрытой мощной броней. Основной ресурс - металлы и минералы, используемые для производства оружия и брони. Их жадность и склонность к роскоши делает их уязвимыми для покупки. Слабость: Купить.',
         'species': 'бронированные титаны',
         'planet': 'титан-7',
         'resource': 'металлы и минералы',
+        'weakness': ['buy'],
     },
     '3': {
         'text': 'Мирные Зеффиры - это существа, живущие в гармонии с природой на планете Зефир-9 с сильными ветрами. Основной ресурс - энергия ветра, используемая для выработки электроэнергии. Их неспособность защитить свои ресурсы от силового захвата делает их уязвимыми для отобрать силой. Слабость: Отобрать силой.',
         'species': 'мирные зеффиры',
         'planet': 'зефир-9',
         'resource': 'энергия ветра',
+        'weakness': ['takeByForce'],
     },
     '4': {
         'text': 'Хитроумные Трикстеры - это умные и коварные существа, населяющие планету-лабиринт Триксис. Основной ресурс - редкие кристаллы, используемые для создания передовых технологий. Их ресурсы можно легко украсть, если вы хитрее их. Слабость: Незаметно украсть.',
         'species': 'хитроумные трикстеры',
         'planet': 'триксис',
         'resource': 'редкие кристаллы',
+        'weakness': ['steal'],
     },
     '5': {
         'text': 'Богатые Плутократы - это богатые и могущественные существа, контролирующие богатую планету Плутократия. Основной ресурс - драгоценные металлы и камни, используемые для создания ювелирных изделий и денег. Их жадность делает их уязвимыми для краж и покупок. Слабость: Незаметно украсть, Купить.',
         'species': 'богатые плутократы',
         'planet': 'плутократия',
         'resource': 'драгоценные металлы и камни',
+        'weakness': ['steal']
     },
     '6': {
         'text': 'Воинственные Берсеркеры - это агрессивные существа, населяющие планету-вулкан Берсерк. Основной ресурс - огонь и лава, используемые для производства оружия и энергии. Их агрессивность и неспособность контролировать свои эмоции делает их уязвимыми для обмана и краж. Слабость: Незаметно украсть, Отобрать силой.',
         'species': 'воинственные берсеркеры',
         'planet': 'берсерк',
         'resource': 'огонь и лава',
+        'weakness': ['steal', 'takeByForce']
     },
     '7': {
         'text': 'Землекопы Гномы - это трудолюбивые существа, живущие на подземной планете Гномония. Основной ресурс - драгоценные металлы и камни, добываемые в подземных шахтах. Их ресурсы легко можно купить, но их подземные туннели делают их уязвимыми для краж. Слабость: Незаметно украсть, Купить.',
         'species': 'землекопы гномы',
         'planet': 'гномония',
         'resource': 'драгоценные металлы и камни',
+        'weakness': ['steal', 'buy']
     },
     '8': {
         'text': 'Знатоки Прометея - это высокоразвитые существа, населяющие планету Прометей. Основной ресурс Прометея - это технологии и инновации. Эти существа обладают невероятной способностью к изобретениям и созданию передовых технологий. Планета Прометей покрыта футуристическими городами и лабораториями, где Знатоки неустанно работают над созданием новых изобретений. Они постоянно стремятся к совершенству и не останавливаются перед ничтожными препятствиями. Однако, их поглощенность работой и изобретениями делает их уязвимыми для внешних атак. Они не имеют сильной армии или защитных систем. Слабость: Отобрать силой, незаметно украсть.',
         'species': 'знатоки прометея',
         'planet': 'прометей',
         'resource': 'технологии и инновации',
+        'weakness': ['steal', 'takeByForce']
     },
     '9': {
         'text': 'Золотой Рай - это необитаемая планета, покрытая золотыми песками. Основной ресурс - золото, которое может быть использовано для создания ювелирных изделий и денег.',
-        'species': '-',
+        'species': '',
         'planet': 'золотой рай',
         'resource': 'золото',
+        'weakness': [],
     },
     '10': {
         'text': 'Ледяная Твердыня - это необитаемая планета, покрытая льдом и снегом. Основной ресурс - вода, которая может быть использована для выращивания растений и поддержания жизни.',
-        'species': '-',
+        'species': '',
         'planet': 'ледяная твердыня',
         'resource': 'вода',
+        'weakness': [],
     },
     '11': {
         'text': 'После многих лет путешествий, мы, наконец, достигли планеты Сапиенция, населенной мудрыми и всезнающими существами. Эта планета, покрытая огромными библиотеками, является источником мудрости и знаний во всей галактике. Жители Сапиенции, известные как Сапиенты, обладают невероятной способностью к обучению и пониманию всего вокруг них. Основной ресурс Сапиенции - это знания и информация, хранящиеся в библиотеках. Мы рады, что наконец-то достигли этой планеты, и не можем дождаться, чтобы начать наше обучение с Сапиентами. Это действительно чудесное место, и мы знаем, что мы вернемся домой с несметным количеством знаний и мудрости.',
         'species': 'сапиенты',
         'planet': 'cапиенция',
         'resource': '',
+        'weakness': [],
     },
 }
 
@@ -80,7 +91,7 @@ questions = {
     '3': lambda specie: f'На какой планете обитает раса {specie}?',
 }
 
-greeting = 'Вы готовы отправиться в путешествие к самой мудрой и всезнающей цивилизации во вселенной? Планета, населенная существами, которые собрали все знания и информацию во вселенной в огромные библиотеки, ожидает вас. Вы сможете обучаться у этих мудрых существ и получить доступ к несметным знаниям и мудрости.\n Ваша цель добраться до планеты cапиенция'
+greeting = 'Вы готовы отправиться в путешествие к самой мудрой и всезнающей цивилизации во вселенной? Планета, населенная существами, которые собрали все знания и информацию во вселенной в огромные библиотеки, ожидает вас. Вы сможете обучаться у этих мудрых существ и получить доступ к несметным знаниям и мудрости.\nВаша цель добраться до планеты cапиенция.'
 
 locations = {
     '1': {
@@ -306,10 +317,12 @@ player = {}
 
 
 def endGame(chatId):
+    global player
     player[chatId]['gameIsBegin'] = False
 
 
 def getCurGoldAndFuel(userId):
+    global player
     return f'доступно кол-во топлива: {player[userId]["fuel"]}, кол-во золота {player[userId]["gold"]}'
 
 
@@ -324,6 +337,8 @@ def handlerBack(call):
 # Ловим событие нажатия кнопки с планетой (перемещение на планету)
 @bot.callback_query_handler(func=lambda call: call.data.startswith('planet'))
 def moveToPlanet(call):
+    #TODO добавить описание планеты, ресурсов, слабостей
+    global player
     chatId = call.message.chat.id
     userId = call.from_user.id
     currentPlanetNum = call.data.removeprefix('planet')
@@ -349,10 +364,12 @@ def moveToPlanet(call):
         endGame(userId)
         return
 
+    fuelPenalty = player[userId]['fuelPenalty']
     # Проверить, является ли выбранная планета пустой и нет ли топлива
-    if 'species' not in player[userId]['loc'][currentPlanetNum] and player[userId]['fuel'] < 6:
-        text = ('Вы оказались на пустой планете без топлива и проиграли игру. Попробуйте сыграть ещё раз. Для этого '
-                'введите команду /game')
+    lenSpecies = len(player[userId]['loc'][currentPlanetNum]['species'])
+    if (len(player[userId]['loc'][currentPlanetNum]['species']) == 0) and (player[userId]['fuel'] < (6 + fuelPenalty)):
+        text = ('Вы оказались на пустой планете. У вас не хватает топлива на очередной перелёт, поэтому вы проиграли '
+                'игру.\nПопробуйте сыграть ещё раз. Для этого введите команду /game')
         bot.edit_message_text(text, chatId, player[userId]['msgId'])
         endGame(userId)
         return
@@ -362,14 +379,17 @@ def moveToPlanet(call):
 
 # Посмотреть список доступных для путешествия планет
 def checkAllowedPlanet(userId):
+    global player
     currentPlanetDistances = player[userId]['loc'][str(player[userId]['currentPlanetNumber'])]['distances']
     fuel = player[userId]['fuel']
+    penaltyFuel = player[userId]['fuelPenalty']
     player[userId]['allowedDistances'] = {}
     for distance in currentPlanetDistances:
-        if currentPlanetDistances[distance] <= fuel:
+        if currentPlanetDistances[distance] + penaltyFuel <= fuel:
             player[userId]['allowedDistances'].update({distance: currentPlanetDistances[distance]})
 
 
+# Отобразить список доступных для путешествия планет
 def displayMoveVariants(chatId, userId):
     keyboard = telebot.types.InlineKeyboardMarkup()
     text = ''
@@ -400,7 +420,7 @@ def risk_answer(call):
                 'удача - это не просто случайность, это дар, данный тебе свыше. Ты - истинный мастер своей судьбы, '
                 'и твой успех вдохновляет всех вокруг тебя. Мы отдаём тебе 500 топлива')
         # Обновляем кол-во топлива
-        player[userId]['fuel'] += 500
+        player[userId]['gold'] += 500
         keyboard = telebot.types.InlineKeyboardMarkup()
         keyboard.add(telebot.types.InlineKeyboardButton('Продолжить игру', callback_data='back'))
         bot.edit_message_text(text, chatId, player[userId]['msgId'], reply_markup=keyboard)
@@ -434,17 +454,9 @@ def playDeadlyGame(chatId, userId):
     bot.edit_message_text(text, chatId, player[userId]['msgId'], reply_markup=keyboard)
 
 
-# TODO remove
-# def goldWords(num):
-#     gold = ''
-#     if num == 0:
-#         gold = 'золота'
-#     elif num == 1:
-#         gold == 'золото'
-
-
 @bot.callback_query_handler(func=lambda call: call.data.startswith('getFuel'))
 def handlerTradeFuel(call):
+    global player
     chatId = call.message.chat.id
     userId = call.from_user.id
     _, fuelPurchased, goldSpent = call.data.split(',')
@@ -454,6 +466,7 @@ def handlerTradeFuel(call):
 
 
 def tradeFuel(chatId, userId):
+    # TODO изменить с учётом слабости
     keyboard = telebot.types.InlineKeyboardMarkup()
     currentLocation = player[userId]['loc'][str(player[userId]['currentPlanetNumber'])]
     # проверяем возможность совершить покупку
@@ -468,6 +481,59 @@ def tradeFuel(chatId, userId):
 
     keyboard.add(telebot.types.InlineKeyboardButton('Вернуться назад', callback_data='back'))
     bot.edit_message_text(text, chatId, player[userId]['msgId'], reply_markup=keyboard)
+
+
+def stealFuel(chatId, userId, callId):
+    currentPlanet = player[userId]['loc'][str(player[userId]['currentPlanetNumber'])]
+    winChance = 10
+    lootChance = 1
+    if 'steal' in currentPlanet['weakness']:
+        winChance *= 3
+    if player[userId]['name'] == 'проворность':
+        winChance *= 2.5
+        lootChance *= 3
+    # При успешном ограблении
+    if random.randint(1, 100) <= winChance:
+        # количество топлива увеличивается
+        loot = random.randint(1*lootChance, 3*lootChance)
+        player[userId]['fuel'] += loot
+        bot.answer_callback_query(callId, f'Вы успешно совершили кражу и получили {loot} топлива', show_alert=True)
+    # При неуспешном ограблении 
+    else:
+        # отобрали всё золото
+        player[userId]['gold'] = 0
+        # отобрали половину топлива
+        player[userId]['fuel'] = player[userId]['fuel'] // 2
+        bot.answer_callback_query(callId, f'Вас поймали на краже, и отобрали всё золото и половину топлива.', show_alert=True)
+    startTrip(chatId, userId)
+
+
+def takeFuelByForce(chatId, userId, callId):
+    currentPlanet = player[userId]['loc'][str(player[userId]['currentPlanetNumber'])]
+    winChance = 10
+    lootChance = 1
+    if 'takeByForce' in currentPlanet['weakness']:
+        winChance *= 3
+    if player[userId]['name'] == 'мощь':
+        winChance *= 3
+        lootChance *= 2
+    # При успешном налёте
+    if random.randint(1, 100) <= winChance:
+        # количество топлива увеличивается
+        loot = random.randint(1*lootChance, 3*lootChance)
+        player[userId]['fuel'] += loot
+        bot.answer_callback_query(callId, f'Вы успешно отобрали топливо у местных жителей и получили {loot} топлива', show_alert=True)
+        startTrip(chatId, userId)
+    # При неуспешном налёте 
+    else:
+        # отобрали всё золото
+        player[userId]['gold'] = 0
+        # отобрали половину топлива
+        player[userId]['fuel'] = player[userId]['fuel'] // 2
+        keyboard = telebot.types.InlineKeyboardMarkup()
+        keyboard.add(telebot.types.InlineKeyboardButton('Вернуться назад', callback_data='back'))
+        text = f'Вы не смогли отобрать топливо силой.\nРазьярённый народ расы {currentPlanet["species"]} испортил ваш корабль и теперь на все путешествия вам придётся тратить на 1 единицу топлива больше.\nТакже у вас отобрали всё золото и половину топлива.'
+        bot.edit_message_text(text, chatId, player[userId]['msgId'], reply_markup=keyboard)
 
 
 @bot.callback_query_handler(func=lambda call: call.data in actions)
@@ -490,9 +556,9 @@ def handlerAction(call):
     elif call.data == 'buy':
         tradeFuel(chatId, userId)
     elif call.data == 'steal':
-        bot.send_message(call.message.chat.id, 'Вы украли топливо')
+        stealFuel(chatId, userId, call.id)
     elif call.data == 'takeByForce':
-        bot.send_message(call.message.chat.id, 'Вы отобрали топливо силой')
+        takeFuelByForce(chatId, userId, call.id)
 
 
 def startTrip(chatId, userId):
@@ -503,16 +569,11 @@ def startTrip(chatId, userId):
     currentPlanetName = player[userId]["loc"][str(player[userId]["currentPlanetNumber"])]["planet"]
     textValues = f'Вы находитесь на планете {currentPlanetName}, в вашем корабле:\n{getCurGoldAndFuel(userId)}.\n'
     text = 'Ваши действия:'
-    if 'msgId' in player[userId]:
-        bot.edit_message_text(textValues + text, chatId, player[userId]['msgId'], reply_markup=keyboard)
-    else:
-        msgBot = bot.send_message(chatId, textValues + text, reply_markup=keyboard)
-        player[userId]['msgId'] = msgBot.message_id
+    bot.edit_message_text(textValues + text, chatId, player[userId]['msgId'], reply_markup=keyboard)
 
 
 # Пометка планеты посещённой
 def checkVisitedPlaner(chatId, planet):
-    global player
     for location in player[chatId]['loc'].values():
         if location['planet'] == planet:
             location['isVisited'] = True
@@ -520,6 +581,7 @@ def checkVisitedPlaner(chatId, planet):
 
 # Помечаем на какой планете сейчас находимся
 def checkCurrentPlanetNumber(chatId, num):
+    global player
     player[chatId]['currentPlanetNumber'] = num
 
 
@@ -542,6 +604,7 @@ def randomChoiceSpeciesAndBirthPlace(userId):
 
 # Назначаем цены на топливо
 def setFuelPrice(userId):
+    global player
     ratio = 1
     if player[userId]["name"] == players['player3']['name']:
         ratio = 2
@@ -552,25 +615,25 @@ def setFuelPrice(userId):
 # Обработка события выбора персонажа
 @bot.callback_query_handler(func=lambda call: call.data in players)
 def initPlayer(call):
+    global player
     chatId = call.message.chat.id
     userId = call.from_user.id
-    global player
     # Инициализация объекта player для конкретного пользователя
     player[userId].update(deepcopy(players[call.data]))
-    player[userId].update({'loc': game_locations[userId], 'gold': 0, 'fuel': 3})
+    player[userId].update({'loc': game_locations[userId], 'gold': 0, 'fuel': 3, 'fuelPenalty': 0})
     # Выбираем случайную расу и планету из списка
     randomChoiceSpeciesAndBirthPlace(userId)
     # Назначаем цены на топливо
     setFuelPrice(userId)
     answer = f'Вы выбрали специализацию {player[userId]["name"]}. Ваша раса {player[userId]["birthPlace"]["species"]}.'
-    bot.send_message(chatId, answer)
+    bot.edit_message_text(answer, chatId, player[userId]['msgId'])
     # Начало путешествия
     startTrip(chatId, userId)
 
 
 # Настраиваем стартовую локацию
 def adjustLocation(userId):
-    global locations, planets, game_locations
+    global game_locations
     # Перемешиваем значения planets и присваиваем их в новую переменную
     temp_planets = list(deepcopy(planets).values())
     shuffledPlanets = temp_planets[:8]
@@ -585,15 +648,21 @@ def adjustLocation(userId):
 # Команда для начала игры
 @bot.message_handler(commands=['game'])
 def game(msg):
+    global player
     chatId = msg.chat.id
     userId = msg.from_user.id
+    print(player)
     # Проверяем начинал ли пользователь игру
     if (userId in player) and ('gameIsBegin' in player[userId]):
+        print(player[userId])
         # Если игра начата прекращаем запуск новой игры
         if player[userId]['gameIsBegin']:
-            bot.send_message(chatId, 'игра уже начата')
+            # keyboard = telebot.types.InlineKeyboardMarkup()
+            # keyboard.add(telebot.types.InlineKeyboardButton('вернуться назад', callback_data='back'))
+            # bot.edit_message_text('игра уже начата', chatId, player[userId]['msgId'], reply_markup=keyboard)
             return
     else:
+        # удаляем данные прошлой игры и отмечаем что игра уже идёт
         player[userId] = {
             'gameIsBegin': True
         }
@@ -608,16 +677,21 @@ def game(msg):
     for i in players:
         button.append(telebot.types.InlineKeyboardButton(players[i]['name'], callback_data=i))
     keyboard.add(*button)
-    # удаляем данные прошлой игры
-    player[userId] = {}
     # Отправляем сообщение с кнопками
-    bot.send_message(chatId, f'{greeting} \nВыберите специализацию:', reply_markup=keyboard)
+    msgBot = bot.send_message(chatId, f'{greeting} \nВыберите специализацию:', reply_markup=keyboard)
+    player[userId]['msgId'] = msgBot.message_id
 
 
 # Команда для старта бота
 @bot.message_handler(commands=['start'])
 def start(msg):
-    bot.send_message(msg.chat.id, f'Привет! Если хочешь сыграть, введи команду /game')
+    chatId = msg.chat.id
+    userId = msg.from_user.id
+    if (userId in player) and ('gameIsBegin' in player[userId]):
+        #TODO handle
+        print('aaaaaaaaaaaaaaa')
+    else:
+        bot.send_message(msg.chat.id, f'Привет! Если хочешь сыграть, введи команду /game')
 
 
 if __name__ == '__main__':
