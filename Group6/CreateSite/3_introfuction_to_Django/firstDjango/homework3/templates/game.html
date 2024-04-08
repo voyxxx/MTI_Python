@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Homework 3</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <style>
+    @import url(https://fonts.googleapis.com/css?family=Ubuntu:300);
+    body {
+      font-family: "Noto Serif", serif;
+      font-optical-sizing: auto;
+      font-style: normal;
+      font-variation-settings: "wdth" 100;
+    }
+    h2 {
+      font-size: 20px;
+    }
+    ol {
+      counter-reset: item }
+    li {
+        display: block;
+        &:before {
+          content: counters(item, ".") " ";
+          counter-increment: item;
+        }
+    }
+    .numbersTitle {
+      margin: 10px 0 20px;
+    }
+    .randomNumber {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: crimson;
+    }
+    em {
+      display: block;
+    }
+    .result {
+      margin: 20px 0;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    .button {
+      display: flex;
+      justify-content: center;
+      width: 300px;
+      margin: 20px 0;
+      padding: 10px 20px;
+      text-decoration: none;
+      color: #fff;
+      background-color: #6f94c6;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Домашнее задание №3 - Введение в Django</h1>
+    <h2>Условия</h2>
+    <ol>
+      <li>Создать views-функцию, которая будет выводить 3 случайных числа от 0 до 3.</li>
+      <li> Создать условия:
+        <ol>
+          <li>Если все числа равны-функция возвращает HTTPResponse с выводом чисел и надписью “Победа, все 3 числа равны!”</li>
+          <li>Если не выпадает одинаковых чисел, возвращает HTTPResponse с выводом чисел и надписью “Повезет в следующий раз!”</li>
+        </ol>
+      </li>
+      <li>Создать адрес для этой страницы: http://127.0.0.1:8000/game</li>
+    </ol>
+    <h2 class="numbersTitle">Случайно сгенерированные числа:</h2>
+    <em>Первое число <span class="randomNumber">{{ numbers.0 }}</span></em>
+    <em>Второе число <span class="randomNumber">{{ numbers.1 }}</span></em>
+    <em>Третье число <span class="randomNumber">{{ numbers.2 }}</span></em>
+
+    <div class="result">
+      {% if len == 1 %}
+       Победа, все 3 числа равны!
+      {% elif len == 2 %}
+        Неплохо, 2 числа равны
+      {% else %}
+        Повезет в следующий раз
+      {% endif %}
+    </div>
+    <a href="game" class="button">Обновить числа</a>
+  </main>
+</body>
+</html>
