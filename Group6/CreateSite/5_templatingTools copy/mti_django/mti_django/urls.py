@@ -21,6 +21,6 @@ from homework5 import views
 
 urlpatterns = [
     path('', views.index),
-    path('top/', TemplateView.as_view(template_name='top.html')),
-    path('mood/', TemplateView.as_view(template_name='mood.html'))
+    path('about/', TemplateView.as_view(template_name='about.html', extra_context={"header": "О сайте", "tutorial": "Изучаем django", "site": "localhost"})),
+    path('contact/', TemplateView.as_view(template_name='contact.html'))
 ]

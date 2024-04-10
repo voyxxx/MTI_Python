@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Топ{% endblock title %}
+{% block header %}Мой топ фильмов{% endblock header %}
+{% block content %}
+<table>
+  <caption>Таблица рейтинга</caption>
+  <thead>
+  <tr>
+    <th>Место</th>
+    <th>Рейтинг кинопоиск</th>
+    <th>Название фильма</th>
+    <th>Год выхода</th>
+    <th>Ссылка</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>1</td>
+    <td>7.8</td>
+    <td>Кунг-фу панда</td>
+    <td>2008</td>
+    <td><a href="https://www.kinopoisk.ru/film/103734/">кинопоиск</a></td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>8.0</td>
+    <td>Планета ка-пэкс</td>
+    <td>2001</td>
+    <td><a href="https://www.kinopoisk.ru/film/723/">кинопоиск</a></td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>7.8</td>
+    <td>Человек с земли</td>
+    <td>2007</td>
+    <td><a href="https://www.kinopoisk.ru/film/252900/">кинопоиск</a></td>
+  </tr>
+  </tbody>
+</table>
+{% endblock content %}
+
+
+{% block secondContent %}
+  {% include "footer.html" with footer=" <footer>MyCorp. 2022. All rights reserved.</footer>" %}
+{% endblock secondContent %}
