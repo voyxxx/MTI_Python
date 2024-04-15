@@ -1,0 +1,83 @@
+Работа с терминалом:
+    pwd - текущий путь
+    ls - выводит содержимое текущей папки
+    mkdir lesson_3 - создает папку в текущей директории
+    cd .\lesson_3\ - переходим в папку lesson_3
+    cd .. - подняться на уровень выше
+    echo 'hello world' - экранирует строку 'hello world'
+    echo 'hello world' > text.txt - записывает hello world в файл text.txt 
+    cat .\text.txt - вывод содержимого файла .\text.txt
+    python .\main.py - запуск файла
+    clear - очистить терминал
+    pip freeze - список установленных модулей
+
+Создание виртуального окружения:
+    python -m venv env
+
+Активация виртуального окружения:
+    Мак/Линукс:
+        source env/bin/activate
+    Виндовс:
+        .\env\Scripts\activate
+
+Если ошибка, что выполнение сценариев отключено, то:
+    От имени администратора в терминале:
+        Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+    
+Далее ставим джанго:
+    pip install django
+
+Создаем проект:
+    django-admin startproject website
+    *website - название проекта
+
+Содержимое проекта:
+    manage.py - скрипт для управления проектом (запуск, создание приложений, добавление таблиц в бд ...)
+    settings.py - настройки проекта
+    urls.py - файл привязок URL 
+
+Запуск проекта:
+    1. Заходим в папку проекта cd .\website\
+    2. Запускаем проект python .\manage.py runserver
+    3. Переходим по http://127.0.0.1:8000/
+
+Остановка проекта:
+    Ctrl + C
+
+Создаем приложение:
+    django-admin startapp app
+    * app - название приложения
+
+Содержимое приложения:
+    admin.py - настройки панели администратора
+    apps.py - главный конфигурационный файл
+    models.py - файл моделей
+    tests.py  - тесты
+    views.py - представления данного приложения
+
+Добавляем наше приложение в список зарегистрированных приложений проекта
+    В файле settings.py в список:
+        INSTALLED_APPS = [
+            'django.contrib.admin',
+            'django.contrib.auth',
+            'django.contrib.contenttypes',
+            'django.contrib.sessions',
+            'django.contrib.messages',
+            'django.contrib.staticfiles',
+            'app' # <--------------------------- наше приложение
+        ]
+
+Далее пропишем первое представление (в файле views.py):
+    from django.http import HttpResponse
+
+    def index(req):
+        return HttpResponse('Hello world')
+
+Заходим в файл urls.py, чтобы связать маршрут и представление
+
+    from app.views import index # <--------------- импорт
+
+    urlpatterns = [
+        path('admin/', admin.site.urls),
+        path('', index) # <----------------------- связали путь и представление
+    ]
