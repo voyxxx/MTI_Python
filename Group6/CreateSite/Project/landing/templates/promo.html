@@ -1,0 +1,102 @@
+{% load static %}
+<section id="promo" class="promo">
+  <header class="header">
+    <menu class="menu" style="display: none;">
+      <div class="container">
+        <ul class="menu-list">
+          <li class="menu-list__item">
+            <a href="#promo" class="menu-list__item-link menu-list__item-link_active">
+              Главная
+            </a>
+          </li>
+          <li class="menu-list__item"><a href="#about" class="menu-list__item-link">О букетах</a></li>
+          <li class="menu-list__item"><a href="#products" class="menu-list__item-link">Каталог букетов</a></li>
+          <li class="menu-list__item"><a href="#reviews" class="menu-list__item-link">Отзывы</a></li>
+          <li class="menu-list__item"><a href="#steps" class="menu-list__item-link">Как заказать</a></li>
+          <li class="menu-list__item"><a href="#questions" class="menu-list__item-link">Вопрос-ответ</a></li>
+        </ul>
+      </div>
+    </menu>
+    <div class="container container_0">
+      <div class="header-cols">
+        <div class="header-cols__col header-cols__col_left">
+          <div class="header-logo">
+            <div class="header-logo__col header-logo__col_left"><img src="{% static 'img/logo.png' %}" alt=""
+                class="header-logo__logo"></div>
+            <div class="header-logo__col header-logo__col_center">
+              <p class="header-logo__name">Lujo</p>
+            </div>
+            <div class="header-logo__col header-logo__col_right">
+              <p class="header-logo__desc">Букеты из&nbsp;клубники в&nbsp;шоколаде c доставкой в день заказа!</p>
+            </div>
+          </div>
+        </div>
+        <div class="header-cols__col header-cols__col_right">
+          <div class="header-socials"><a href="whatsapp://send?phone=+7(977)-893-78-18" target="_blank"
+              onclick="gtag('event', 'whatsapp_klickmessage', {'event_category': 'kontakt'});QUON_reach_goal(574);"
+              class="header-socials__item whatsapp__button">
+              <div class="header-socials__item-icon header-socials__item-icon_whatsapp"></div>
+              <p class="header-socials__item-title">WhatsApp</p>
+            </a> <a href="viber://chat?number=+7(977)-893-78-18" target="_blank"
+              onclick="gtag('event', 'viber_klickmessage', {'event_category': 'kontakt'});yaCounter49021271.reachGoal('order');QUON_reach_goal(574);"
+              class="header-socials__item viber__button">
+              <div class="header-socials__item-icon header-socials__item-icon_viber"></div>
+              <p class="header-socials__item-title">Viber</p>
+            </a></div>
+          <div
+            onclick="gtag('event', 'klickphone', {'event_category': 'kontakt'});ym(49021271, 'reachgoal', 'klickphone');"
+            class="header-contacts"><a href="tel:+7(977)-893-78-18" class="header-contacts__phone ct">
+              <nobr>8(977)893-78-18</nobr>
+            </a>
+            <p class="header-contacts__time">Ежедневно с&nbsp;08.00 до&nbsp;22.00</p>
+          </div>
+          <div class="header-nav"><a href="tel:+7(977)-893-78-18" class="header-nav__phone"></a>
+            <div class="header-nav__menu-open"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="promo__content">
+    <div class="container container_0">
+      <div class="promo__decor promo__decor_1"></div>
+      <div class="promo__decor promo__decor_2"></div>
+      <div class="promo-cols">
+        <div class="promo-cols__col promo-cols__col_left"><img src="{% static 'img/product.png' %}" alt=""
+            class="promo__picture"></div>
+        <div class="promo-cols__col promo-cols__col_right">
+          <div class="promo-circles">
+            <div class="promo-circles__item"></div>
+            <div class="promo-circles__item"></div>
+          </div>
+          <p class="title title_center title_m">Удивите любимого человека необычным подарком:</p>
+          <p class="title title_center title_xl">Букеты из&nbsp;<span class="title_pink">клубники</span>
+            в&nbsp;шоколаде<br> с&nbsp;доставка в день заказа!</p>
+          <div class="promo-advantages">
+            <div class="promo-advantages__item">
+              <div class="promo-advantages__item-icon-container"><img src="{% static 'img/icon-1.png' %}" alt=""
+                  class="promo-advantages__item-icon"></div>
+              <p class="promo-advantages__item-title">Свежайшие ягоды высшего сорта</p>
+            </div>
+            <div class="promo-advantages__item">
+              <div class="promo-advantages__item-icon-container"><img src="{% static 'img/icon-2.png' %}" alt=""
+                  class="promo-advantages__item-icon"></div>
+              <p class="promo-advantages__item-title">Вкуснейший бельгийский шоколад</p>
+            </div>
+            <div class="promo-advantages__item">
+              <div class="promo-advantages__item-icon-container"><img src="{% static 'img/icon-3.png' %}" alt=""
+                  class="promo-advantages__item-icon"></div>
+              <p class="promo-advantages__item-title">Вернем деньги, если букет не&nbsp;понравился</p>
+            </div>
+          </div> <img src="{% static 'img/product.png' %}" alt="" class="promo__picture promo__picture_m">
+          <div class="promo__btn-container">
+            <div class="promo__btn-icon"></div> <button
+              onclick="gtag('event', 'vybratbuket ', {'event_category': 'clickbutton'})"
+              class="btn btn_purple btn_l promo__btn">Выбрать букет из клубники <i
+                class="btn__icon btn__icon_arrow"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

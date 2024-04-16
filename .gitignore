@@ -10,3 +10,6 @@ Group6/CreateSite/**/**/**/__pycache__
 Group6/CreateSite/**/**/**/__pycache__/*
 
 *.pyc
+Group6/CreateSite/Project/.env/*
+
+

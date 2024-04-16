@@ -1,5 +1,5 @@
-1) python -m venv myenv
-2) myenv\Scripts\activate
+1) python -m venv .env
+2) .env\Scripts\activate
 3) pip install django
 4) django-admin startproject (название проекта)
 5) python manage.py runserver
