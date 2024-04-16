@@ -3,10 +3,10 @@ venv
 .DS_Store
 .idea
 
-Group6/CreateSite/3_daria/env/*
-Group6/CreatingBotTelegrams/9_telegram bot with the first game/__pycache__/bot_token.cpython-311.pyc
-Group6/CreateSite/6,7,8/.venv/*
-Group6/CreateSite/**/**/**/__pycache__
-Group6/CreateSite/**/**/**/__pycache__/*
 
 *.pyc
+
+/**/.env/
+/**/.venv/
+/**/env/
+/**/__pycache__/
