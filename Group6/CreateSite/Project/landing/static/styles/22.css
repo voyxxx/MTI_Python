@@ -1,4 +1,4 @@
-@font-face {
+/* @font-face {
   font-family: "Montserrat-Regular";
   src: url(../fonts/Montserrat-Regular/Montserrat-Regular.eot);
   src: url(../fonts/Montserrat-Regular/Montserrat-Regular.eot?#iefix)format("embedded-opentype"),url(../fonts/Montserrat-Regular/Montserrat-Regular.woff) format("woff"),url(../fonts/Montserrat-Regular/Montserrat-Regular.ttf) format("truetype");
@@ -36,14 +36,17 @@
   src: url(../fonts/Tinos-Regular/Tinos-Regular.eot?#iefix)format("embedded-opentype"),url(../fonts/Tinos-Regular/Tinos-Regular.woff) format("woff"),url(../fonts/Tinos-Regular/Tinos-Regular.ttf) format("truetype");
   font-style: normal;
   font-weight: 400
-}
+} */
 
 #app,html {
   overflow-x: hidden
 }
 
 body {
-  font-family: "Montserrat-Regular",sans-serif;
+  font-family: "Montserrat",sans-serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
   font-size: 16px;
   line-height: 22px;
   color: #2a2a2a
@@ -82,7 +85,7 @@ a {
 }
 
 .btn {
-  font-family: "Tinos-Regular",sans-serif;
+  font-family: "Tinos",sans-serif;
   background: 0 0;
   margin: 0;
   padding: 0;
@@ -160,7 +163,7 @@ a {
 }
 
 .btn__icon_arrow {
-  background-image: url(../img/btn/icon-arrow.svg);
+  background-image: url('/static/img/icon-arrow-right.svg');
   background-position: center center;
   background-repeat: no-repeat;
   height: 13px;
@@ -170,7 +173,7 @@ a {
 }
 
 .title {
-  font-family: "Tinos-Regular",sans-serif
+  font-family: "Tinos",sans-serif
 }
 
 .title_s {
@@ -211,7 +214,7 @@ a {
 }
 
 .desc {
-  font-family: "Tinos-Regular",sans-serif
+  font-family: "Tinos",sans-serif
 }
 
 .desc_m {
@@ -220,7 +223,7 @@ a {
 }
 
 .slider__arrow {
-  background-image: url(../img/slider/icon-arrow.svg);
+  background-image: url('/static/img/icon-arrow-left.svg');
   background-position: -webkit-calc(50% - 2px) center;
   background-position: calc(50% - 2px) center;
   background-repeat: no-repeat;
@@ -321,15 +324,15 @@ a {
 }
 
 .form__input_name,.form__textarea_name {
-  background-image: url(../img/form/icon-name.svg)
+  background-image: url('/static/img/icon-name.svg');
 }
 
 .form__input_phone,.form__textarea_phone {
-  background-image: url(../img/form/icon-phone.svg)
+  background-image: url('/static/img/icon-phone-black.svg')
 }
 
 .form__input_address,.form__textarea_address {
-  background-image: url(../img/form/icon-address.svg)
+  background-image: url('/static/img/icon-address.svg')
 }
 
 .form__input_error,.form__textarea_error {
@@ -424,7 +427,7 @@ a {
   left: 0;
   width: 14px;
   height: 14px;
-  background: url(../img/form/icon-checkbox.svg);
+  background: url('/static/img/icon-checkbox.svg');
   background-position: center center;
   background-repeat: no-repeat;
   opacity: 0;
@@ -572,7 +575,7 @@ a {
 }
 
 .header-logo__name {
-  font-family: "Tinos-Regular",sans-serif;
+  font-family: "Tinos",sans-serif;
   font-size: 35px;
   line-height: 41px;
   text-transform: uppercase
@@ -617,12 +620,11 @@ a {
 }
 
 .header-socials__item-icon_whatsapp {
-  background-image: url(../img/header/icon-whatsapp.svg)
+  background-image: url('/static/img/icon-whatsapp.svg')
 }
 
 .header-socials__item-icon_viber {
-  /* background-image: url(../img/header/icon-viber.svg); */
-  background-image: url(../img/icon-viber.svg);
+  background-image: url('/static/img/icon-viber.svg');
 }
 
 .header-socials__item:hover .header-socials__item-icon {
@@ -632,7 +634,7 @@ a {
 }
 
 .header-socials__item-title {
-  font-family: "Tinos-Regular",sans-serif;
+  font-family: "Tinos",sans-serif;
   color: #80756e;
   font-size: 12px;
   line-height: 18px;
@@ -645,7 +647,7 @@ a {
 }
 
 .header-contacts__phone,.header-contacts__time {
-  font-family: "Tinos-Regular",sans-serif;
+  font-family: "Tinos",sans-serif;
   font-size: 28px;
   line-height: 34px
 }
@@ -673,7 +675,7 @@ a {
 }
 
 .header-nav__menu-open,.header-nav__phone {
-  background-image: url(../img/header/icon-phone.svg);
+  background-image: url('/static/img/icon-phone-pink.svg');
   background-position: center center;
   background-repeat: no-repeat;
   background-size: 50%;
@@ -685,7 +687,7 @@ a {
 }
 
 .header-nav__menu-open {
-  background-image: url(../img/header/icon-menu.svg);
+  background-image: url('/static/img/icon-menu.svg');
   margin-left: 15px
 }
 
@@ -746,7 +748,7 @@ a {
 }
 
 .promo {
-  background-image: url(../img/promo/bg.jpg);
+  background-image: url('/static/img/bg.jpg');
   background-size: cover;
   min-height: 736px;
   background-position: bottom center
@@ -764,7 +766,7 @@ a {
 }
 
 .promo__decor_1 {
-  background-image: url(../img/decor/decor-1.png);
+  background-image: url('/static/img/decor-1.png');
   top: 0;
   right: -70px;
   height: 132px;
@@ -772,7 +774,7 @@ a {
 }
 
 .promo__decor_2 {
-  background-image: url(../img/decor/decor-2.png);
+  background-image: url('/static/img/decor-2.png');
   bottom: 30px;
   left: -160px;
   height: 159px;
@@ -938,7 +940,7 @@ a {
 }
 
 .promo__btn-icon {
-  background-image: url(../img/promo/btn-icon.png);
+  background-image: url('/static/img/btn-icon.png');
   background-position: center center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -962,7 +964,7 @@ a {
 }
 
 .t-promo__instagram-icon {
-  background-image: url(../img/footer/icon-instagram.svg);
+  background-image: url('/static/img/icon-instagram.svg');
   background-position: center center;
   background-repeat: no-repeat;
   width: 50px;
@@ -1051,15 +1053,15 @@ a {
 }
 
 .about-items__item-bg_1 {
-  background-image: url(../img/about/item-bg-1.png)
+  background-image: url('/static/img/item-bg-1.png')
 }
 
 .about-items__item-bg_2 {
-  background-image: url(../img/about/item-bg-2.png)
+  background-image: url('/static/img/item-bg-2.png')
 }
 
 .about-items__item-bg_3 {
-  background-image: url(../img/about/item-bg-3.png)
+  background-image: url('/static/img/item-bg-3.png')
 }
 
 .about-items__item-content {
@@ -1079,7 +1081,7 @@ a {
 }
 
 .consists {
-  background-image: url(../img/consists/bg.jpg);
+  background-image: url('/static/img/bg-consist.jpg');
   background-position: bottom center;
   background-repeat: no-repeat;
   padding: 70px 0
@@ -1099,7 +1101,7 @@ a {
 }
 
 .consists__decor_1 {
-  background-image: url(../img/decor/decor-3.png);
+  background-image: url('/static/img/decor-3.png');
   top: -100px;
   right: 30px;
   height: 209px;
@@ -1107,7 +1109,7 @@ a {
 }
 
 .consists__decor_2 {
-  background-image: url(../img/decor/decor-4.png);
+  background-image: url('/static/img/decor-4.png');
   bottom: -50px;
   left: 0;
   height: 218px;
@@ -1125,7 +1127,7 @@ a {
 }
 
 .consists__picture-lines {
-  background-image: url(../img/consists/lines.png);
+  background-image: url('/static/img/lines.png');
   background-position: bottom center;
   background-repeat: no-repeat;
   position: absolute;
@@ -1186,7 +1188,7 @@ a {
 }
 
 .products__title-icon {
-  background-image: url(../img/products/icon-marker.svg);
+  background-image: url('/static/img/icon-marker.svg');
   background-position: center center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -1242,7 +1244,7 @@ a {
 }
 
 .products-tabs__tab-title {
-  font-family: "Tinos-Regular",sans-serif;
+  font-family: "Tinos",sans-serif;
   text-align: center;
   text-transform: uppercase;
   font-size: 15px;
@@ -1363,14 +1365,14 @@ a {
 }
 
 .products-items__item-old-price {
-  font-family: "Tinos-Regular",sans-serif;
+  font-family: "Tinos",sans-serif;
   text-align: center;
   color: #bdbdbd;
   text-decoration: line-through
 }
 
 .products-items__item-price {
-  font-family: "Tinos-Regular",sans-serif;
+  font-family: "Tinos",sans-serif;
   text-align: center;
   margin-top: 2px;
   font-size: 22px;
@@ -1403,7 +1405,7 @@ a {
 }
 
 .notlike__decor_1 {
-  background-image: url(../img/decor/decor-3.png);
+  background-image: url('/static/img/decor-3.png');
   top: -70px;
   right: -40px;
   height: 209px;
@@ -1411,7 +1413,7 @@ a {
 }
 
 .notlike__decor_2 {
-  background-image: url(../img/decor/decor-4.png);
+  background-image: url('/static/img/decor-4.png');
   bottom: -100px;
   left: -10px;
   height: 218px;
@@ -1448,7 +1450,7 @@ a {
   position: absolute;
   top: 0;
   right: 640px;
-  background-image: url(../img/notlike/bg.png);
+  background-image: url('/static/img/bg-notlike.png');
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -1504,7 +1506,7 @@ a {
 }
 
 .card-contacts__phone,.card-contacts__time {
-  font-family: "Tinos-Regular",sans-serif;
+  font-family: "Tinos",sans-serif;
   text-align: center
 }
 
@@ -1557,12 +1559,11 @@ a {
 }
 
 .card-contacts-socials__item-icon_whatsapp {
-  background-image: url(../img/header/icon-whatsapp.svg)
+  background-image: url('/static/img/icon-whatsapp.svg')
 }
 
 .card-contacts-socials__item-icon_viber {
-  /* background-image: url(../img/header/icon-viber.svg); */
-  background-image: url(/img/icon-viber.svg);
+  background-image: url('/static/img/icon-viber.svg');
 }
 
 .card-contacts-socials__item:hover .card-contacts-socials__item-icon {
@@ -1572,7 +1573,7 @@ a {
 }
 
 .card-contacts-socials__item-title {
-  font-family: "Tinos-Regular",sans-serif;
+  font-family: "Tinos",sans-serif;
   color: #80756e;
   font-size: 12px;
   line-height: 18px;
@@ -1622,7 +1623,7 @@ a {
   position: absolute;
   top: -50px;
   left: -260px;
-  background-image: url(../img/steps/decor.jpg);
+  background-image: url('/static/img/decor.jpg');
   background-position: center center;
   background-repeat: no-repeat;
   width: 415px;
@@ -1729,7 +1730,7 @@ a {
 }
 
 .whatch {
-  background-image: url(../img/whatch/bg.jpg);
+  background-image: url('/static/img/bg-whatch.jpg');
   background-position: bottom center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -1783,7 +1784,7 @@ a {
 }
 
 .whatch-play__play {
-  background-image: url(../img/whatch/icon-play.svg);
+  background-image: url('/static/img/icon-play.svg');
   background-position: center center;
   background-repeat: no-repeat;
   width: 68px;
@@ -1898,7 +1899,7 @@ a {
 }
 
 .questions__decor_1 {
-  background-image: url(../img/decor/decor-3.png);
+  background-image: url('/static/img/decor-3.png');
   top: -70px;
   right: -40px;
   height: 209px;
@@ -1906,7 +1907,7 @@ a {
 }
 
 .questions__decor_2 {
-  background-image: url(../img/decor/decor-4.png);
+  background-image: url('/static/img/decor-4.png');
   bottom: -130px;
   left: -10px;
   height: 218px;
@@ -1967,7 +1968,7 @@ a {
 }
 
 .questions-item__arrow {
-  background-image: url(../img/questions/icon-arrow.svg);
+  background-image: url('/static/img/icon-arrow.svg');
   background-position: center center;
   background-repeat: no-repeat;
   position: absolute;
@@ -2079,7 +2080,7 @@ a {
 }
 
 .footer-logo__name {
-  font-family: "Tinos-Regular",sans-serif;
+  font-family: "Tinos",sans-serif;
   font-size: 35px;
   line-height: 41px;
   text-transform: uppercase
@@ -2175,11 +2176,11 @@ a {
 }
 
 .footer-socials__item-icon_instagram {
-  background-image: url(../img/footer/icon-instagram.svg)
+  background-image: url('/static/img/icon-instagram.svg')
 }
 
 .footer-socials__item-icon_vk {
-  background-image: url(../img/footer/icon-vk.svg)
+  background-image: url('/static/img/icon-vk.svg')
 }
 
 .t-footer {
@@ -2280,7 +2281,7 @@ a {
 }
 
 .popup-order__decor_1 {
-  background-image: url(../img/decor/decor-3.png);
+  background-image: url('/static/img/decor-3.png');
   background-size: contain;
   top: 20px;
   right: -90px;
@@ -2289,7 +2290,7 @@ a {
 }
 
 .popup-order__decor_2 {
-  background-image: url(../img/decor/decor-2.png);
+  background-image: url('static/img/decor-2.png');
   bottom: -70px;
   left: -50px;
   height: 159px;
@@ -2327,7 +2328,7 @@ a {
   position: absolute;
   top: 0;
   right: 500px;
-  background-image: url(../img/notlike/bg.png);
+  background-image: url('/static/img/bg-notlike.png');
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -2708,7 +2709,7 @@ a {
   }
 
   .notlike-inner__bg {
-      background-image: url(../img/notlike/bg-m.png);
+      background-image: url('/static/img/bg-m.png');
       position: relative;
       right: auto;
       top: auto;

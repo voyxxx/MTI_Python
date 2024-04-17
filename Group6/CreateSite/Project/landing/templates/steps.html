@@ -1,0 +1,48 @@
+{% load static %}
+<section id="steps" class="steps">
+  <div class="container steps__container">
+    <div class="steps__decor"></div>
+    <div class="steps-inner">
+      <p class="title title_center title_ml">Заказать букет проще простого</p>
+      <div class="slider steps-items">
+        <div class="steps-items__item">
+          <div class="steps-items__item-inner">
+            <div class="steps-items__item-picture-container steps-items__item-picture-container_s"><img
+                src="{% static 'img/img-1.png' %}" alt="" class="steps-items__item-picture"></div>
+            <p class="title title_center title_s steps-items__item-title">Заявка или звонок</p>
+            <p class="steps-items__item-desc">Вы&nbsp;оставляете заявку на сайте или звоните нам: <a
+                href="tel:+7 (977)-893-78-18" class="ct">
+                <nobr>+7 (977)-893-78-18</nobr>
+              </a></p> <button onclick="gtag('event', 'ostavyt_zayavky_prosto', {'event_category': 'clickbutton'})"
+              class="btn btn_purple btn_s steps-items__item-btn">Оставить заявку</button>
+          </div>
+        </div>
+        <div class="steps-items__item">
+          <div class="steps-items__item-inner">
+            <div class="steps-items__item-picture-container"><img src="{% static 'img/img-2.png' %}" alt=""
+                class="steps-items__item-picture"></div>
+            <p class="title title_center title_s steps-items__item-title">Уточняем детали</p>
+            <p class="steps-items__item-desc">Менеджер перезванивает и&nbsp;подтверждает заказ</p>
+          </div>
+        </div>
+        <div class="steps-items__item">
+          <div class="steps-items__item-inner">
+            <div class="steps-items__item-picture-container"><img src="{% static 'img/img-3.png' %}" alt=""
+                class="steps-items__item-picture"></div>
+            <p class="title title_center title_s steps-items__item-title">Доставка</p>
+            <p class="steps-items__item-desc">Курьер доставляет букет в&nbsp;удобное для Вас место и время. Стоимость
+              доставка в пределах МКАД 300 рублей, за пределы расчет индивидуальный</p>
+          </div>
+        </div>
+        <div class="steps-items__item">
+          <div class="steps-items__item-inner">
+            <div class="steps-items__item-picture-container"><img src="{% static 'img/img-4.png' %}" alt=""
+                class="steps-items__item-picture"></div>
+            <p class="title title_center title_s steps-items__item-title">Получение</p>
+            <p class="steps-items__item-desc">Вы получаете букет и&nbsp;оплачиваете удобным для вас способом</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
