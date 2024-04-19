@@ -18,19 +18,34 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from app.views import *
 
+
 store_url = [
-    path('', index_2),
+    path('', index),
     path('catalog/', catalog),
+    path('contacts/', contacts),
     path('catalog/<int:id>/', product),
-    path('contacts/', contacts)
 ]
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index),
-    path('rand/', rand),
     path('store/', include(store_url)),
-    # path('hello/<str:name>/', greeting),
-    # re_path(r'^hello/(?P<name>\D+)/', greeting),
-    path('file/', file),
 ]
+
+
+# lesson 4
+# store_url = [
+#     path('', index_2),
+#     path('catalog/', catalog),
+#     path('catalog/<int:id>/', product),
+#     path('contacts/', contacts)
+# ]
+
+# urlpatterns = [
+#     path('admin/', admin.site.urls),
+#     path('', index),
+#     path('rand/', rand),
+#     path('store/', include(store_url)),
+#     # path('hello/<str:name>/', greeting),
+#     # re_path(r'^hello/(?P<name>\D+)/', greeting),
+#     path('file/', file),
+# ]

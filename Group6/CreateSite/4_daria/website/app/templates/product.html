@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block head %}
+  <title>{{product.name}}</title>
+{% endblock %}
+
+{% block content %}
+  <section>
+    <h2>{{product.name}}</h2>
+    <h3>{{product.price}} рублей</h3>
+  </section>
+{% endblock %}

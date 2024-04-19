@@ -1,0 +1,31 @@
+Для наследования сначала создаем файл base.html с основным кодом страницы
+В base.html определяем блоки для динамичного контента
+    {% block NAME %}
+    {% endblock %}
+
+В шаблонах прописываем наследование
+    {% extends 'base.html' %}
+
+и содержимое блоков:
+    {% block NAME %}
+        <title>Главная</title>
+    {% endblock %}
+
+Использование переменных внутри шаблонов:
+    Передаем в render() значения:
+        return render(req, 'catalog.html', {'name': name})
+    В шаблоке используем как:
+        {{name}}
+
+Циклы:
+    {% for product in products %}
+        <h3>{{product}}</h3>
+    {% endfor %}
+
+
+Условия:
+    {% if product.price < 110 %}
+        <h4 style="color: red;">SALE {{product.price}} рублей</h4>
+    {% else %}
+        <h4>{{product.price}} рублей</h4>
+    {% endif %}

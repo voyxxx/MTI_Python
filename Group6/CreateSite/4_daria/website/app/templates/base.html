@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <header>
+    <h1>Название компании</h1>
+  </header>
+  <nav>
+    <a href="/store/">Главная</a>
+    <a href="/store/catalog/">Каталог товаров</a>
+    <a href="/store/contacts/">Контакты</a>
+  </nav>
+  {% block content %}
+  {% endblock %}
+  <footer>
+    &copy; Название компании
+  </footer>
+</body>
+</html>
