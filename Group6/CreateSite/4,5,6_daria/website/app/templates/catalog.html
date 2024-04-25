@@ -1,33 +1,18 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block head %}
   <title>Каталог</title>
-  <style>
-    div {
-      background-color: aquamarine;
-      border-radius: 30px;
-      text-align: center;
-      margin: 10px 20%;
-      padding: 5px;
-    }
-    img {
-      width: 50%;
-      height: 100%;
-    }
-    a {
-      text-decoration: none;
-      color: #000;
-    }
-  </style>
+  <link rel="stylesheet" href="{% static 'css/catalog.css' %}">\
 {% endblock %}
 
 {% block content %}
   <section>
     <h1>Это каталог товаров</h1>
-    {% for i, product in products.items %}
+    {% for product in products %}
       <div>
-        <a href="./{{i}}">
-          <img src="https://attuale.ru/wp-content/uploads/2018/05/1-45.jpg" alt="">
+        <a href="./{{product.link_name}}">
+          <img src="{% static 'image/' %}{{ product.path }}" alt="">
           <h2>{{product.name}}</h2>
           {% if product.price < 90 %}
             <h3 style="color: red" >{{product.price}} рублей SALE</h3>

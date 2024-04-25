@@ -1,0 +1,12 @@
+h1 {
+  color: brown;
+}
+
+p {
+  color: green;
+}
+
+img {
+  width: 600px;
+  object-fit: contain;
+}

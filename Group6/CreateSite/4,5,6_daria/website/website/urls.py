@@ -23,12 +23,16 @@ store_url = [
     path('', index),
     path('catalog/', catalog),
     path('contacts/', contacts),
-    path('catalog/<int:id>/', product),
+    path('catalog/<path:product_name>/', product),
 ]
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('store/', include(store_url)),
+    path('test/', test),
+    path('json/', show_json),
+    path('rand/', rand_product),  
+    path('rand/<path:path_to_photo>/', img_product),  
 ]
 
 

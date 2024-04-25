@@ -1,0 +1,28 @@
+body {
+  background-color: cadetblue;
+  font-family: 'Times New Roman', Times, serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  padding: 1px 0;
+  background-color: rgb(55, 124, 126);  
+}
+
+
+nav {
+  color: aliceblue;
+}
+
+nav a {
+  color: aliceblue;
+  text-decoration: none;
+  padding: 10px 20px;
+}
+
+img {
+  border-radius: 15px;
+}
+
+

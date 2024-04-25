@@ -1,0 +1,20 @@
+JSON
+
+1. Строки (обязательно в двойный кавычках)
+2. Числа
+3. Логические значения (true/false)
+4. Пустое значение (null)
+5. Массивы []
+6. Объекты {}
+
+{
+  "info": {
+      "name": "Vasya",
+      "age": 65,
+      "animals": [
+          {"is_cat": true, "name": "Murka"},
+          {"is_cat": false, "name": "Homa"}
+      ],
+      "children": null
+  }
+}
