@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple form</title>
+</head>
+<body>
+  <h1>Простая HTML форма</h1>
+  <form method="GET" class="post-form">{% csrf_token %}
+    <label for="name">Name: </label>
+    <input type="text" id="id" name="name" placeholder="Input your name"><br></br>
+
+    <label for="phone">Phone: </label>
+    <input type="text" id="phone" name="phone" placeholder="Input your phone"><br></br>
+
+    <input type="submit" value="Submit">
+  </form>
+</body>
+</html>

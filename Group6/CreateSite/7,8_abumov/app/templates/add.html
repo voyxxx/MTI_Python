@@ -1,0 +1,15 @@
+{% extends 'base2.html' %}
+
+{% block title %} Добавление товара {% endblock %}
+
+{% block content %}
+  
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p}}
+        <button type="submit">Добавить товар</button>
+    </form>
+{% endblock %}
+
+
+  <!-- <form action="{% url 'add' %}" method="POST"> -->
