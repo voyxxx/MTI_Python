@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include, re_path
 from app.views import *
+from django_form.views import *
 
 
 store_url = [
@@ -32,7 +33,12 @@ urlpatterns = [
     path('test/', test),
     path('json/', show_json),
     path('rand/', rand_product),  
-    path('rand/<path:path_to_photo>/', img_product),  
+    path('rand/<path:path_to_photo>/', img_product),
+    path('form/', form),  
+    path('html_form/', html_form),
+    path('response_form/', response_form, name='r_form'),
+    path('django_form/', django_form),
+    path('model_form/', model_form),
 ]
 
 

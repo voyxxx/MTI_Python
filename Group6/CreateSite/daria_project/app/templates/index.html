@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+  <title>My theme</title>
+</head>
+<body>
+  <header>
+    <h1>Нестандартные ремонты для вашего уникального дома</h1>
+    <p>Превратите свой дом во что-то особенное с нашей помощью</p>
+  </header>
+
+  <section id="about">
+    <h2>Онас</h2>
+    <p>Мы команда профессиоаналов</p>
+  </section>
+
+  <section id="services">
+    <h2>Наши услуги</h2>
+    <ul>
+      <li>Ремонт и перепланировка разных помещений</li>
+      <li>Создание и установка различных дизайнерских элементов</li>
+      <li>Индивидуальный подход к каждому проекту</li>
+      <li>Работа с нестандартыми материалами и техниками</li>
+      <li></li>
+    </ul>
+  </section>
+  <section id="projects">
+    <h2>Наши проекты</h2>
+    <div>
+      <img width="500px" src="{% static 'images/project1.jpg' %}" alt="">
+      <p>Описание проекта 1</p>
+    </div>
+    <div>
+      <img width="500px" src="{% static 'images/project2.jpg' %}" alt="">
+      <p>Описание проекта 2</p>
+    </div>
+  </section>
+  <section id="feddback">
+    <h2>Отзывы о нас</h2>
+    <div>
+      <p>Классный отзыв</p>
+      <p></p>
+    </div>
+    <div>
+      <p>Классный отзыв</p>
+      <p></p>
+    </div>
+  </section>
+  <section id="form">
+    <h2>Заполните форму</h2>
+    <h3>{{ error }}</h3>
+    <form action="" method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Отправить</button>
+    </form>
+  </section>
+  <section id="contacts">
+    <h2>Контакты</h2>
+    <p>Телефон +7 (999) 999-99-99</p>
+    <p>Адрес: г. Москва, ул. Пушкина, д. 1</p>
+    <p>Электронная почта: 0b5Yj@example.com</p>
+  </section>
+  <footer>
+    <p>&copy © 2023 My theme. Все права защищены.</p>
+  </footer>
+</body>
+</html>

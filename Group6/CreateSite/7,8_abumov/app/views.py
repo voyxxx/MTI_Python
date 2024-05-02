@@ -9,7 +9,7 @@ def add_page(request):
         if form.is_valid():
             try:
                 form.save()
-                return redirect('home')
+                return redirect('/')
             except:
                 form.add_error(None, "Ошибка в заполнении формы")
     person = ProductPostForm()

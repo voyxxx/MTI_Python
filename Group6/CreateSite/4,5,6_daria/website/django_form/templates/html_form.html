@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML форма</title>
+</head>
+<body>
+    <form action="{% url 'r_form' %}" method="get">
+        {% csrf_token %}
+        <label for="name">Введите имя:</label>
+        <input type="text" placeholder="имя" id="name" name="name"><br></br>
+        <label for="phone">Введите телефон:</label>
+        <input type="tel" placeholder="телефон" id="phone" name="phone">"><br></br>
+        <input type="submit" value="Отправить">
+    </form>
+    <br></br>
+    <br></br>
+    <form action="{% url 'r_form' %}" method="post">
+      {% csrf_token %}
+      <label for="name">Введите имя:</label>
+      <input type="text" placeholder="имя" id="name" name="name"><br></br>
+      <label for="phone">Введите телефон:</label>
+      <input type="tel" placeholder="телефон" id="phone" name="phone">"><br></br>
+      <input type="submit" value="Отправить">
+  </form>
+</body>
+</html>

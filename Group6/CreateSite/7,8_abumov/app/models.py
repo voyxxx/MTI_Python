@@ -19,7 +19,7 @@ class Product(models.Model):
                              verbose_name='Название товара', unique=True)
     brand = models.ForeignKey(Catalog, on_delete=models.CASCADE, default=1, verbose_name='Производитель')
     price = models.IntegerField(default=0, verbose_name='Цена')
-    abount = models.IntegerField(default=0, verbose_name='Остаток товара на складе')
+    amount = models.IntegerField(default=0, verbose_name='Остаток товара на складе')
 
     class Meta:
         verbose_name = 'Продукт'

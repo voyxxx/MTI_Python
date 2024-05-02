@@ -1,0 +1,89 @@
+body {
+  background: linear-gradient(to bottom, rgb(255, 0, 255), rgb(0, 255, 255));
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #fff;
+  margin: 0;
+}
+
+header {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  text-align: center;
+}
+
+#about {
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 40px;
+}
+
+#services {
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 40px;
+}
+
+#projects {
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 40px;
+}
+
+#projects div {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  text-align: center;
+  padding: 20px;
+  margin: 20px 20%;
+}
+
+#projects div img {
+  width: 100%;
+  border-radius: 10px;
+  max-width: 400px;
+}
+
+#feedback {
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 40px;
+}
+
+#feedback div {
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px;
+}
+
+#form {
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 40px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: none;
+}
+
+button {
+  padding: 10px 20px;
+  border-radius: 10px;
+  background-color: rgb(214, 27, 231);
+  color: #fff;
+  border: none;
+}
+
+button:hover {
+  background-color: rgb(78, 53, 136);
+}
+
+#contacts {
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 40px;
+}
+
+footer {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 40px;
+  text-align: center;
+}
