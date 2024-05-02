@@ -1382,7 +1382,9 @@ a {
 .products-items__item-btn {
   margin: 20px auto 0;
   padding-left: 40px;
-  padding-right: 40px
+  padding-right: 40px;
+  max-width: max-content;
+  text-align: center;
 }
 
 .notlike {
@@ -1726,7 +1728,8 @@ a {
 }
 
 .steps-items__item-btn {
-  margin: 15px auto 0
+  margin: 15px auto 0;
+  text-align: center;
 }
 
 .whatch {

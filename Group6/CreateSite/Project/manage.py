@@ -20,3 +20,6 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+# Запуск без отображения в консоли запросов из папки статик
+# python ./manage.py runserver 3>&1 1>&2 2>&3 3>&- | grep -v static

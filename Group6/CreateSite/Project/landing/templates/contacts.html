@@ -6,16 +6,23 @@
   <div class="container container_0">
     <div class="contacts-cols">
       <div class="contacts-cols__col contacts-cols__col_left">
-        <form onsubmit="QUON_reach_goal(529); return true;" class="form form_theme_space">
-          <div class="form__field"><input type="text" placeholder="Введите Ваше имя"
-              class="form__input form__input_name"></div>
-          <div class="form__field"><input type="text" placeholder="Введите контактный телефон"
-              class="form__input form__input_phone" data-mask="+7 (###) ###-##-##" data-previous-value=""></div>
+        <form action="/callback/" class="form form_theme_space" method="post">
+          {% csrf_token %}
+          <div class="form__field">
+            <input type="text" placeholder="Введите Ваше имя" required
+              name="name" class="form__input form__input_name" min="2">
+          </div>
+          <div class="form__field tooltip">
+            <div class="tooltiptext">Телефон в формате xxx-xxx-xxxx</div>
+            <input type="tel" placeholder="Введите контактный телефон"
+              class="form__input form__input_phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+          </div>
           <div class="form__field"><button
               onclick="gtag('event', 'pozvonitemne_niz', {'event_category': 'clickbutton'})"
               class="btn btn_purple btn_l form__submit callback__button_bottom">Перезвоните мне</button>
-            <div class="form__policy"><input id="radio-2" type="checkbox" class="form__radio"> <label for="radio-2"
-                class="form__radio-label">
+            <div class="form__policy">
+              <input id="radio-2" type="checkbox" class="form__radio form__policy--input" name="is_agree" required> 
+              <label for="radio-2" class="form__radio-label">
                 <p class="form__policy-text">Я принимаю условия <span>передачи информации</span></p>
               </label></div>
           </div>
@@ -28,11 +35,11 @@
           </a>
           <p class="card-contacts__time">Ежедневно с&nbsp;08.00 до&nbsp;22.00<br> или свяжитесь в&nbsp;месседжерах:</p>
           <div class="card-contacts-socials"><a href="whatsapp://send?phone=+7(977)-893-78-18" target="_blank"
-              onclick="QUON_reach_goal(574); return true;" class="card-contacts-socials__item">
+              class="card-contacts-socials__item">
               <div class="card-contacts-socials__item-icon card-contacts-socials__item-icon_whatsapp"></div>
               <p class="card-contacts-socials__item-title">WhatsApp</p>
             </a> <a href="viber://chat?number=+7(977)-893-78-18" target="_blank"
-              onclick="QUON_reach_goal(574); return true;" class="card-contacts-socials__item">
+              class="card-contacts-socials__item">
               <div class="card-contacts-socials__item-icon card-contacts-socials__item-icon_viber"></div>
               <p class="card-contacts-socials__item-title">Viber</p>
             </a></div>
